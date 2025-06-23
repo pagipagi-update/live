@@ -1,0 +1,65 @@
+/* src/components/Header.css */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Menyebarkan item ke kiri dan kanan */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--background-dark);
+  border-bottom: 1px solid var(--border-color);
+  height: 60px; /* Tinggi header tetap */
+  overflow: hidden; /* Penting untuk marquee agar tidak meluber */
+}
+
+/* Area Teks Berjalan */
+.header-marquee-area {
+  flex-grow: 1; /* Ambil sebagian besar ruang */
+  text-align: left; /* Teks berjalan dari kiri */
+  color: var(--text-light); /* Warna teks untuk marquee */
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap; /* Penting untuk marquee agar teks tidak pecah baris */
+  overflow: hidden; /* Penting agar marquee tidak menyebabkan scrollbar */
+}
+
+.header-marquee-area marquee {
+  padding: 0 10px; /* Sedikit padding agar teks tidak terlalu mepet */
+}
+
+
+/* Area Tombol Kanan */
+.header-right-button-area {
+  flex-shrink: 0; /* Pastikan tombol tidak menyusut */
+  margin-left: 30px; /* Jarak dari teks berjalan */
+}
+
+.visit-website-button-highlight {
+  background-color: var(--accent-red); /* Warna merah mencolok */
+  color: var(--text-light);
+  border: none; /* Hapus border */
+  padding: 10px 20px; /* Padding lebih besar untuk lebih menonjol */
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(var(--accent-red), 0.4); /* Efek bayangan untuk mencolok */
+}
+
+.visit-website-button-highlight:hover {
+  background-color: #ff4d4d; /* Sedikit lebih terang saat hover */
+  transform: translateY(-2px); /* Efek sedikit naik saat hover */
+  box-shadow: 0 6px 15px rgba(var(--accent-red), 0.6);
+}
+
+/* Hapus semua styling sebelumnya untuk:
+   .header-left (yang lama)
+   .header-center-logo
+   .header-right-icons-search
+   .search-bar
+   .search-icon
+   .search-bar input
+   .header-right .icon
+   .profile-icon
+   .visit-website-button (yang lama)
+*/

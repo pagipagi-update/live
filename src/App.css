@@ -1,0 +1,23 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/* src/App.css */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  flex-grow: 1; /* Mengambil sisa ruang horizontal */
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Padding keseluruhan untuk konten utama */
+}
+
+.main-content-area {
+  flex-grow: 1;
+  padding-top: 20px; /* Jarak dari header */
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Jarak antara HeroSection dan ContinueWatchingSection */
+}

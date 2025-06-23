@@ -1,0 +1,34 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background-dark: #121212;
+  --sidebar-dark: #1e1e1e;
+  --text-light: #ffffff;
+  --text-gray: #a0a0a0;
+  --accent-red: #1698CE; /* UBAH INI: Warna aksen baru (biru) */
+  --card-background: #282828;
+  --border-color: #333333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Global Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

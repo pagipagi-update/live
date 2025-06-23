@@ -1,0 +1,87 @@
+/* src/components/ChatBox.css */
+.chatbox-container {
+  width: 350px; /* Lebar chatbox */
+  background-color: var(--card-background); /* Warna latar belakang chatbox */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-left: 20px; /* Jarak dari video */
+}
+
+.chatbox-header {
+  background-color: var(--sidebar-dark); /* Warna header chatbox */
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.chatbox-messages {
+  flex-grow: 1; /* Mengambil sisa ruang vertikal */
+  padding: 15px;
+  overflow-y: auto; /* Agar bisa digulir */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Jarak antar pesan */
+}
+
+.chat-message {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  word-wrap: break-word; /* Memastikan pesan panjang tidak meluber */
+}
+
+.chat-username {
+  font-weight: 600;
+  color: var(--accent-red); /* Warna username */
+}
+
+.chat-info {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  text-align: center;
+  padding: 10px 0;
+  font-style: italic;
+}
+
+.chatbox-input-form {
+  display: flex;
+  border-top: 1px solid var(--border-color);
+  padding: 15px;
+  gap: 10px;
+}
+
+.chatbox-input-form input {
+  flex-grow: 1;
+  background-color: var(--background-dark); /* Warna input yang lebih gelap */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 15px;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.chatbox-input-form input::placeholder {
+  color: var(--text-gray);
+}
+
+.chatbox-input-form button {
+  background-color: var(--accent-red);
+  color: var(--text-light);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chatbox-input-form button:hover {
+  background-color: #ff4d4d;
+}

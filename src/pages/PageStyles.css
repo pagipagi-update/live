@@ -1,0 +1,171 @@
+/* src/pages/PageStyles.css */
+
+.page-container {
+  /* Kurangi padding-top untuk menaikkan posisi konten */
+  padding: 20px 30px 30px 30px; /* Atas: 20px, Kanan: 30px, Bawah: 30px, Kiri: 30px */
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  min-height: calc(100vh - 60px - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* UBAH INI: Perkecil jarak antar elemen utama (title, desc, layout) */
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 5px; /* UBAH INI: Perkecil jarak bawah dari judul */
+}
+
+.page-description {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  margin-bottom: 20px; /* UBAH INI: Perkecil jarak bawah dari deskripsi (sebelum layout video/chat) */
+}
+
+/* ------------------------------------------- */
+/* Layout untuk Video Player dan ChatBox */
+/* ------------------------------------------- */
+.live-content-layout {
+  display: flex;
+  gap: 20px; /* Jarak antara video player area dan chatbox */
+  flex-wrap: wrap; /* Memungkinkan item untuk pecah baris di layar kecil */
+  flex-grow: 1; /* Agar mengambil sisa ruang vertikal yang tersedia dalam page-container */
+}
+
+.video-player-area {
+  flex-grow: 1;
+  /* min-width mungkin perlu disesuaikan jika ingin lebih kecil lagi,
+     tapi 450px sudah cukup fleksibel untuk desktop/tablet */
+  min-width: 450px;
+  /* max-width kalkulasi sudah cukup fleksibel */
+  max-width: calc(100% - 350px - 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.video-placeholder {
+  position: relative; /* PENTING: agar iframe absolut diposisikan di dalamnya */
+  width: 100%;
+  padding-bottom: 56.25%; /* UBAH INI: Kembali ke rasio aspek 16:9 (9/16 * 100%) */
+  /* Hapus properti height: 550px; yang sebelumnya ada di sini */
+  background-color: #000;
+  border-radius: 10px;
+  overflow: hidden; /* PENTING: Untuk menjaga border-radius dan menyembunyikan bagian iframe yang meluber */
+
+  /* Hapus display: flex, justify-content, align-items dari sini
+     karena kita akan memposisikan iframe secara absolut di dalam kontainer yang responsif rasio aspek */
+}
+
+/* Styling untuk iframe Owncast */
+.owncast-iframe-player {
+  position: absolute; /* PENTING: agar mengisi penuh parent relatif */
+  top: 0;
+  left: 0;
+  width: 100%; /* Mengisi lebar penuh dari .video-placeholder */
+  height: 100%; /* Mengisi tinggi penuh dari .video-placeholder */
+  border: none; /* Menghilangkan border default iframe */
+  margin: 0; /* Memastikan tidak ada margin bawaan */
+  padding: 0; /* Memastikan tidak ada padding bawaan */
+  line-height: 0; /* Mengatasi celah yang disebabkan oleh line-height pada elemen inline */
+  font-size: 0; /* Mengatasi celah yang disebabkan oleh font-size pada elemen inline */
+  vertical-align: top; /* Mengatasi masalah alignment vertikal */
+
+  /* Gunakan 'cover' untuk "full menutupi" dengan kemungkinan cropping.
+     Jika ingin seluruh video terlihat (dengan bar hitam jika perlu), gunakan 'contain'. */
+  object-fit: cover;
+  z-index: 1; /* Pastikan di atas background placeholder */
+}
+
+/* ------------------------------------------- */
+/* Stream Info di bawah Video Player */
+/* ------------------------------------------- */
+.stream-info {
+  background-color: var(--card-background);
+  padding: 20px;
+  border-radius: 10px;
+  color: var(--text-light);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.stream-info h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--accent-red); /* Menggunakan warna aksen biru baru */
+}
+
+.stream-info p {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+/* ------------------------------------------- */
+/* Placeholder Content (untuk halaman HomePage) */
+/* ------------------------------------------- */
+/* Styling ini masih relevan untuk HomePage.js jika Anda belum menghapusnya */
+.placeholder-content {
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.placeholder-content p {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.page-placeholder-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------- */
+/* Responsive Adjustments (Media Queries) */
+/* ------------------------------------------- */
+@media (max-width: 992px) {
+  .live-content-layout {
+    flex-direction: column; /* Video dan chat akan menumpuk di layar kecil */
+  }
+  .video-player-area {
+    min-width: unset; /* Hapus min-width agar bisa mengambil lebar penuh */
+    max-width: 100%; /* Ambil lebar penuh */
+  }
+  .chatbox-container { /* Chatbox ambil lebar penuh di bawah video */
+    width: 100%;
+    margin-left: 0; /* Hapus margin-left dari ChatBox.css untuk layout kolom */
+    margin-top: 20px; /* Tambahkan sedikit jarak dari video di atasnya */
+  }
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 20px 15px; /* Padding lebih kecil untuk perangkat seluler */
+    gap: 15px;
+  }
+  .page-title {
+    font-size: 2rem;
+  }
+  .page-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .stream-info h3 {
+    font-size: 1.3rem;
+  }
+}

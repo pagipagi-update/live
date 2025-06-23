@@ -1,0 +1,31 @@
+/* src/components/ContinueWatchingSection.css */
+.live-now-section { /* Ubah class name di sini juga jika sudah diubah di JS */
+  margin-top: 40px;
+}
+
+.section-header {
+  display: flex;
+  /* Karena dropdown dihapus, kita tidak lagi perlu justify-content: space-between
+     Kita bisa biarkan defaultnya (flex-start) atau set explicitely */
+  justify-content: flex-start; /* Atau biarkan default, tergantung layout yang diinginkan */
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* Hapus semua styling untuk filter-dropdown jika masih ada
+.filter-dropdown { ... }
+.filter-dropdown option { ... }
+*/
+
+.video-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsif */
+  gap: 25px; /* Jarak antar kartu */
+}
