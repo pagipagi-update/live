@@ -1,171 +1,522 @@
 /* src/pages/PageStyles.css */
 
 .page-container {
-  /* Kurangi padding-top untuk menaikkan posisi konten */
-  padding: 20px 30px 30px 30px; /* Atas: 20px, Kanan: 30px, Bawah: 30px, Kiri: 30px */
+  padding: 20px 30px 30px 30px;
   background-color: var(--background-dark);
   color: var(--text-light);
-  min-height: calc(100vh - 60px - 40px);
+  min-height: calc(100vh - 60px - 40px - 160px);
   display: flex;
   flex-direction: column;
-  gap: 15px; /* UBAH INI: Perkecil jarak antar elemen utama (title, desc, layout) */
+  gap: 25px;
+  position: relative; 
 }
 
-.page-title {
+.page-title { /* Ini sekarang tidak lagi digunakan di LiveSportsPage, tapi bisa tetap ada untuk halaman lain */
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-light);
-  margin-bottom: 5px; /* UBAH INI: Perkecil jarak bawah dari judul */
+  margin-bottom: 5px;
 }
 
-.page-description {
+.page-description { /* Ini sekarang tidak lagi digunakan di LiveSportsPage, tapi bisa tetap ada untuk halaman lain */
   font-size: 1.1rem;
-  color: var(--text-gray);
-  margin-bottom: 20px; /* UBAH INI: Perkecil jarak bawah dari deskripsi (sebelum layout video/chat) */
-}
-
-/* ------------------------------------------- */
-/* Layout untuk Video Player dan ChatBox */
-/* ------------------------------------------- */
-.live-content-layout {
-  display: flex;
-  gap: 20px; /* Jarak antara video player area dan chatbox */
-  flex-wrap: wrap; /* Memungkinkan item untuk pecah baris di layar kecil */
-  flex-grow: 1; /* Agar mengambil sisa ruang vertikal yang tersedia dalam page-container */
-}
-
-.video-player-area {
-  flex-grow: 1;
-  /* min-width mungkin perlu disesuaikan jika ingin lebih kecil lagi,
-     tapi 450px sudah cukup fleksibel untuk desktop/tablet */
-  min-width: 450px;
-  /* max-width kalkulasi sudah cukup fleksibel */
-  max-width: calc(100% - 350px - 20px);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.video-placeholder {
-  position: relative; /* PENTING: agar iframe absolut diposisikan di dalamnya */
-  width: 100%;
-  padding-bottom: 56.25%; /* UBAH INI: Kembali ke rasio aspek 16:9 (9/16 * 100%) */
-  /* Hapus properti height: 550px; yang sebelumnya ada di sini */
-  background-color: #000;
-  border-radius: 10px;
-  overflow: hidden; /* PENTING: Untuk menjaga border-radius dan menyembunyikan bagian iframe yang meluber */
-
-  /* Hapus display: flex, justify-content, align-items dari sini
-     karena kita akan memposisikan iframe secara absolut di dalam kontainer yang responsif rasio aspek */
-}
-
-/* Styling untuk iframe Owncast */
-.owncast-iframe-player {
-  position: absolute; /* PENTING: agar mengisi penuh parent relatif */
-  top: 0;
-  left: 0;
-  width: 100%; /* Mengisi lebar penuh dari .video-placeholder */
-  height: 100%; /* Mengisi tinggi penuh dari .video-placeholder */
-  border: none; /* Menghilangkan border default iframe */
-  margin: 0; /* Memastikan tidak ada margin bawaan */
-  padding: 0; /* Memastikan tidak ada padding bawaan */
-  line-height: 0; /* Mengatasi celah yang disebabkan oleh line-height pada elemen inline */
-  font-size: 0; /* Mengatasi celah yang disebabkan oleh font-size pada elemen inline */
-  vertical-align: top; /* Mengatasi masalah alignment vertikal */
-
-  /* Gunakan 'cover' untuk "full menutupi" dengan kemungkinan cropping.
-     Jika ingin seluruh video terlihat (dengan bar hitam jika perlu), gunakan 'contain'. */
-  object-fit: cover;
-  z-index: 1; /* Pastikan di atas background placeholder */
-}
-
-/* ------------------------------------------- */
-/* Stream Info di bawah Video Player */
-/* ------------------------------------------- */
-.stream-info {
-  background-color: var(--card-background);
-  padding: 20px;
-  border-radius: 10px;
-  color: var(--text-light);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.stream-info h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: var(--accent-red); /* Menggunakan warna aksen biru baru */
-}
-
-.stream-info p {
-  font-size: 0.95rem;
-  color: var(--text-gray);
-  line-height: 1.5;
-}
-
-/* ------------------------------------------- */
-/* Placeholder Content (untuk halaman HomePage) */
-/* ------------------------------------------- */
-/* Styling ini masih relevan untuk HomePage.js jika Anda belum menghapusnya */
-.placeholder-content {
-  background-color: var(--card-background);
-  border-radius: 10px;
-  padding: 30px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.placeholder-content p {
-  font-size: 1.2rem;
-  font-style: italic;
   color: var(--text-gray);
   margin-bottom: 20px;
 }
 
-.page-placeholder-img {
-  max-width: 100%;
-  height: auto;
+/* ------------------------------------------- */
+/* Layout untuk Video Player dan ChatBox (digunakan di halaman live) */
+/* ------------------------------------------- */
+.live-content-layout {
+  display: flex;
+  gap: 30px; /* Jarak antara video frame dan chatbox */
+  flex-wrap: wrap; /* Izinkan wrap di mobile */
+  flex-grow: 1;
+  align-items: stretch; /* PENTING: Agar tinggi kolom video frame dan chatbox sama */
+}
+
+/* HAPUS INI: Styling main-left-column-content karena div-nya sudah tidak ada di HTML */
+/*
+.main-left-column-content {
+  flex-grow: 1; 
+  min-width: 450px; 
+  max-width: calc(100% - 350px - 30px); 
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+}
+*/
+
+/* KOTAK GABUNGAN: Video dan Info (kini anak langsung dari live-content-layout) */
+.video-player-and-info-frame {
+  flex-grow: 1; /* Biarkan video frame tumbuh */
+  min-width: 450px; /* Tetapkan min-width untuk desktop */
+  max-width: calc(100% - 350px - 30px); /* Tetapkan max-width untuk desktop */
+  
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: var(--deep-shadow);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  position: relative; 
+}
+
+.video-placeholder { 
+  position: relative; 
+  width: 100%;
+  padding-bottom: 56.25%; /* Rasio aspek 16:9 */
+  background-color: #000;
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.owncast-iframe-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  font-size: 0;
+  vertical-align: top;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.stream-offline-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.85);
+    border-radius: 12px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    gap: 10px;
+    z-index: 10;
+}
+
+.stream-offline-overlay h3 {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    margin: 0;
+}
+.stream-offline-overlay p {
+    color: var(--text-gray);
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+/* Stream Info kini bagian dari frame gabungan */
+.stream-info {
+  background-color: transparent; 
+  padding: 15px 20px;
+  border-top: none;
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.stream-info-header { 
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.streamer-avatar { 
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-right: 10px; 
+    border: 2px solid var(--primary-blue); 
+    flex-shrink: 0; 
+}
+
+.stream-title-group { 
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.stream-title-display {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin: 0; 
+  line-height: 1.2;
+}
+
+.streamer-name { 
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.stream-description-display { 
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+  margin-top: 0; 
+  margin-bottom: 15px; 
+}
+
+/* Styling untuk Container Tag */
+.stream-tags-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 8px; 
+    margin-top: 5px; 
+}
+
+/* Styling untuk Setiap Item Tag */
+.stream-tag-item {
+    background-color: var(--input-bg); 
+    color: var(--text-gray);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.stream-tag-item:hover {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+
+/* ------------------------------------------- */
+/* Bagian Link Alternatif dan Tombol (Dirapikan) */
+/* KINI BERADA DI LUAR LIVE-CONTENT-LAYOUT */
+/* ------------------------------------------- */
+.alternative-links-section {
+  width: 100%; /* Ambil lebar penuh (sesuai padding page-container) */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Rata jarak-jaraknya */
+  align-items: center; /* Pusatkan vertikal */
+  gap: 10px; /* Jarak antar tombol */
+  padding: 15px 20px; /* Sesuaikan padding */
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: var(--soft-shadow);
+  margin-top: 25px; /* Jarak dari live-content-layout */
+}
+
+.alt-link-button {
+  background-color: var(--input-bg);
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  padding: 10px 15px;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+  
+  flex-grow: 1; 
+  flex-basis: calc(25% - 7.5px); /* Untuk 4 tombol per baris dengan gap 10px */
+  max-width: calc(25% - 7.5px); /* Batasi lebar maksimum */
+  justify-content: center;
+}
+
+.alt-link-button.primary {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.alt-link-button:hover {
+  background-color: var(--light-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.alt-link-button.primary:hover {
+  background-color: var(--light-blue);
+}
+
+.alt-link-button svg {
+  font-size: 1.1rem;
 }
 
 /* ------------------------------------------- */
-/* Responsive Adjustments (Media Queries) */
+/* Bagian 2 Promosi di bawah Link (Dirapikan) */
+/* KINI BERADA DI LUAR LIVE-CONTENT-LAYOUT */
 /* ------------------------------------------- */
+.promos-below-links-section {
+  width: 100%; /* Ambil lebar penuh (sesuai padding page-container) */
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: var(--soft-shadow);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 25px; /* Jarak dari alternative-links-section */
+}
+
+.section-title-promos {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.promos-grid-below-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Dua kolom untuk promo */
+  gap: 20px; 
+}
+
+.promo-card-below-links {
+  background-color: var(--input-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-card-below-links:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--soft-shadow);
+}
+
+.promo-image-below-links {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-content-below-links {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-title-below-links {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.promo-excerpt-below-links {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  margin-bottom: 15px;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.promo-button-below-links {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+.promo-button-below-links:hover {
+  background-color: var(--light-blue);
+}
+
+
+/* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
+  .page-container {
+    padding: 15px 20px;
+    gap: 20px;
+  }
   .live-content-layout {
-    flex-direction: column; /* Video dan chat akan menumpuk di layar kecil */
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap; 
   }
-  .video-player-area {
-    min-width: unset; /* Hapus min-width agar bisa mengambil lebar penuh */
-    max-width: 100%; /* Ambil lebar penuh */
+  .video-player-and-info-frame { 
+    flex-grow: 1; 
+    min-width: unset;
+    max-width: 100%;
   }
-  .chatbox-container { /* Chatbox ambil lebar penuh di bawah video */
+  .chatbox-container { 
     width: 100%;
-    margin-left: 0; /* Hapus margin-left dari ChatBox.css untuk layout kolom */
-    margin-top: 20px; /* Tambahkan sedikit jarak dari video di atasnya */
+    margin-left: 0;
+    margin-top: 20px;
+    order: 2; 
+  }
+  .alternative-links-section {
+    justify-content: space-around;
+    gap: 10px;
+    padding: 15px;
+    order: 3;
+    margin-top: 20px; 
+  }
+  .alt-link-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    flex-basis: calc(50% - 10px); 
+    max-width: calc(50% - 10px);
+    justify-content: center;
+  }
+  .promos-below-links-section {
+    order: 4; 
+    padding: 15px;
+    gap: 15px;
+    margin-top: 20px; 
+  }
+  .promos-grid-below-links {
+      grid-template-columns: 1fr; 
+      gap: 15px;
+  }
+  .promo-card-below-links {
+      flex-direction: row; 
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+  }
+  .promo-image-below-links {
+      width: 100px; 
+      height: 60px;
+      flex-shrink: 0;
+      border-radius: 8px;
+  }
+  .promo-content-below-links {
+      padding: 0;
+  }
+  .promo-title-below-links {
+      font-size: 1rem;
+      margin-bottom: 5px;
+  }
+  .promo-excerpt-below-links {
+      font-size: 0.8rem;
+      -webkit-line-clamp: 2;
+  }
+  .promo-button-below-links {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+  }
+  /* Responsive for stream info */
+  .stream-info-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 5px;
+  }
+  .stream-title-display {
+      font-size: 1.3rem;
+  }
+  .streamer-name {
+      font-size: 0.8rem;
+  }
+  .stream-description-display {
+      font-size: 0.85rem;
+  }
+  .stream-tags-container {
+      gap: 5px;
+  }
+  .stream-tag-item {
+      font-size: 0.7rem;
   }
 }
 
 @media (max-width: 768px) {
   .page-container {
-    padding: 20px 15px; /* Padding lebih kecil untuk perangkat seluler */
+    padding: 15px;
     gap: 15px;
   }
-  .page-title {
-    font-size: 2rem;
-  }
-  .page-description {
-    font-size: 1rem;
-    margin-bottom: 20px;
-  }
   .stream-info h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+  }
+  .alternative-links-section {
+    flex-direction: column; 
+    align-items: center;
+    gap: 10px;
+  }
+  .alt-link-button {
+    width: 90%; 
+  }
+  /* News/Promo grid in mobile (re-used by PromoPage.css) */
+  .news-list-container, .promo-grid-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .news-card-title, .promo-card-title {
+    font-size: 1.1rem;
+  }
+  .news-card-excerpt, .promo-card-excerpt {
+    font-size: 0.85rem;
+  }
+  .news-card-image, .promo-card-image {
+    height: 150px;
+  }
+
+  /* Promos below links section for smaller mobile */
+  .promo-card-below-links {
+      flex-direction: column; 
+      align-items: flex-start;
+      padding: 15px;
+      gap: 10px;
+  }
+  .promo-image-below-links {
+      width: 100%;
+      height: 120px;
+  }
+  .promo-content-below-links {
+      padding: 0;
+  }
+  .promo-button-below-links {
+      align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 10px;
+  }
+  .alt-link-button {
+    width: 100%; 
   }
 }

@@ -1,43 +1,50 @@
 /* src/components/ChatBox.css */
 .chatbox-container {
   width: 350px; /* Lebar chatbox */
-  background-color: var(--card-background); /* Warna latar belakang chatbox */
+  background-color: var(--card-background);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; /* Penting untuk gulir pesan */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  margin-left: 20px; /* Jarak dari video */
+  margin-left: 20px; /* Jarak dari kolom kiri */
+  
+  flex-grow: 1; /* PENTING: Biarkan chatbox meregang secara vertikal */
+  height: auto; /* Pastikan tidak ada tinggi tetap yang menghalangi stretch */
 }
 
+/* HAPUS SEMUA STYLING COLLAPSE/OPEN/CLOSED jika masih ada */
+
+
 .chatbox-header {
-  background-color: var(--sidebar-dark); /* Warna header chatbox */
+  background-color: var(--sidebar-dark);
   padding: 15px;
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-light);
   border-bottom: 1px solid var(--border-color);
   text-align: center;
+  display: block; 
 }
 
 .chatbox-messages {
-  flex-grow: 1; /* Mengambil sisa ruang vertikal */
+  flex-grow: 1; /* Mengisi ruang yang tersisa */
   padding: 15px;
-  overflow-y: auto; /* Agar bisa digulir */
+  overflow-y: auto; /* Agar pesan bisa digulir */
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Jarak antar pesan */
+  gap: 10px;
 }
 
 .chat-message {
   font-size: 0.95rem;
   color: var(--text-light);
-  word-wrap: break-word; /* Memastikan pesan panjang tidak meluber */
+  word-wrap: break-word;
 }
 
 .chat-username {
   font-weight: 600;
-  color: var(--accent-red); /* Warna username */
+  color: var(--primary-blue);
 }
 
 .chat-info {
@@ -48,6 +55,58 @@
   font-style: italic;
 }
 
+/* Form Input Username */
+.username-input-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    flex-grow: 1; /* Mengisi ruang utama saat input username tampil */
+    justify-content: center; /* Pusatkan konten */
+    align-items: center;
+    text-align: center;
+}
+
+.username-input-form p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.username-input-form input[type="text"] {
+    width: 90%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+}
+
+.username-input-form input[type="text"]::placeholder {
+    color: var(--text-gray);
+}
+
+.username-input-form button {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 90%;
+}
+
+.username-input-form button:hover {
+    background-color: var(--light-blue);
+}
+
+
+/* Form Input Chat (tetap ada) */
 .chatbox-input-form {
   display: flex;
   border-top: 1px solid var(--border-color);
@@ -57,7 +116,7 @@
 
 .chatbox-input-form input {
   flex-grow: 1;
-  background-color: var(--background-dark); /* Warna input yang lebih gelap */
+  background-color: var(--input-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 10px 15px;
@@ -71,7 +130,7 @@
 }
 
 .chatbox-input-form button {
-  background-color: var(--accent-red);
+  background-color: var(--primary-blue);
   color: var(--text-light);
   border: none;
   border-radius: 8px;
@@ -83,5 +142,58 @@
 }
 
 .chatbox-input-form button:hover {
-  background-color: #ff4d4d;
+  background-color: var(--light-blue);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .chatbox-container {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+    order: 2; /* Setelah video frame */
+    height: auto; /* Biarkan flex mengatur */
+    min-height: 350px; /* Minimal tinggi agar tidak terlalu kecil */
+  }
+}
+
+@media (max-width: 768px) {
+    .chatbox-container {
+        min-height: 300px;
+    }
+    .chatbox-header {
+        font-size: 1rem;
+        padding: 12px 10px;
+    }
+    .chatbox-messages {
+        padding: 10px;
+    }
+    .chatbox-message {
+        font-size: 0.9rem;
+    }
+    .chatbox-input-form {
+        padding: 10px;
+        gap: 8px;
+    }
+    .chatbox-input-form input,
+    .chatbox-input-form button {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+    .username-input-form {
+        padding: 15px;
+    }
+    .username-input-form p {
+        font-size: 1rem;
+    }
+    .username-input-form input[type="text"],
+    .username-input-form button {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+}
+@media (max-width: 480px) {
+    .chatbox-container {
+        min-height: 250px;
+    }
 }
