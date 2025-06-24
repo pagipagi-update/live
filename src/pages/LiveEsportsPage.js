@@ -1,53 +1,35 @@
+// src/pages/LiveEsportsPage.js
 import React, { useState, useEffect, useRef } from 'react';
 import ChatBox from '../components/ChatBox';
-import './PageStyles.css';
+import './PageStyles.css'; // Styling umum halaman
+import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'; 
+import { FiLink, FiMessageCircle } from 'react-icons/fi'; 
+import { promoArticles } from '../data/promoData'; // Data promo untuk bagian bawah
 
-// URL dasar Owncast Anda. Ganti ini dengan URL OWNCAST ANDA YANG SEBENARNYA!
-const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/';
+const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; 
 
 function LiveEsportsPage() {
-  const [messages, setMessages] = useState([
-    { id: 1, user: 'EsportsBotBola88', text: 'Selamat datang di turnamen Esports Bola88! Dukung tim favoritmu.' },
-    { id: 2, user: 'GamerX', text: 'Permainan yang luar biasa dari Tim Biru!' },
-    { id: 3, user: 'ProPlayer', text: 'Strategi yang sangat cerdas!' },
-  ]);
-  const [streamStatus, setStreamStatus] = useState(null);
+  const [messages, setMessages] = useState([]);
   const ws = useRef(null);
 
-  const handleSendMessage = (messageText) => {
+  const handleSendMessage = (username, messageText) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
       const message = {
         type: 'CHAT',
+        author: username,
         body: messageText,
       };
       ws.current.send(JSON.stringify(message));
     } else {
-      console.warn('WebSocket not connected. Message not sent.');
+      console.warn("WebSocket chat tidak terhubung. Pesan Anda hanya akan terlihat secara lokal.");
       setMessages((prevMessages) => [
         ...prevMessages,
-        { id: Date.now(), user: 'Anda (Offline)', text: messageText },
+        { id: Date.now(), user: `${username} (Anda - Offline)`, text: messageText }, 
       ]);
     }
   };
 
   useEffect(() => {
-    // 1. Ambil Status Stream
-    const fetchStreamStatus = async () => {
-      try {
-        const response = await fetch(`${OWNCAST_BASE_URL}/api/status`);
-        const data = await response.json();
-        setStreamStatus(data);
-        console.log("Owncast Status (Esports):", data);
-      } catch (error) {
-        console.error('Error fetching Owncast status (Esports):', error);
-        setStreamStatus(null);
-      }
-    };
-
-    fetchStreamStatus();
-    const statusInterval = setInterval(fetchStreamStatus, 30000);
-
-    // 2. Inisialisasi WebSocket Chat
     ws.current = new WebSocket(`${OWNCAST_BASE_URL}/ws`);
 
     ws.current.onopen = () => {
@@ -87,21 +69,27 @@ function LiveEsportsPage() {
     };
 
     return () => {
-      clearInterval(statusInterval);
       if (ws.current) {
         ws.current.close();
       }
     };
   }, []);
 
+  const alternativeLinks = [
+    { text: 'Link Alternatif', icon: <FiLink />, url: 'https://linkalternatif.com', isPrimary: true }, 
+    { text: 'Telegram Bola88', icon: <FaTelegramPlane />, url: 'https://t.me/bola88resmi', isPrimary: false }, 
+    { text: 'Whatsapp Bola88', icon: <FaWhatsapp />, url: 'https://wa.me/628123456789', isPrimary: false }, 
+    { text: 'Livechat Bola88', icon: <FiMessageCircle />, url: 'https://livechat.bola88.com', isPrimary: false }, 
+  ];
+
+  const streamTags = ['Dota 2', 'Esports', 'Tournament', 'Live Match', 'English']; 
+  const latestPromos = promoArticles.slice(0, 2);
+
   return (
     <div className="page-container">
-      <h1 className="page-title">Live Esports</h1>
-      <p className="page-description">Ikuti turnamen esports terbesar dan aksi tim favoritmu.</p>
-
       <div className="live-content-layout">
-        <div className="video-player-area">
-          <div className="video-placeholder">
+        <div className="video-player-and-info-frame">
+          <div className="video-placeholder"> 
             <iframe
               src={`${OWNCAST_BASE_URL}/embed/video`}
               title="Owncast Live Esports Stream"
@@ -112,19 +100,66 @@ function LiveEsportsPage() {
             ></iframe>
           </div>
           <div className="stream-info">
-              <h3>
-                  {streamStatus && streamStatus.online ? streamStatus.streamTitle : 'Stream Tidak Tersedia'}
-              </h3>
-              <p>
-                  {streamStatus && streamStatus.online ? streamStatus.streamDescription : 'Tunggu live stream dimulai...'}
+              <div className="stream-info-header">
+                  <img 
+                      src="https://via.placeholder.com/50/1a1a1a/FFFFFF?text=E" /* Avatar Esports */
+                      alt="Profile Avatar"
+                      className="streamer-avatar"
+                  />
+                  <div className="stream-title-group">
+                      <h3 className="stream-title-display">
+                          Livestreaming Turnamen Esports Hari ini
+                      </h3>
+                      <p className="streamer-name">Esports Official</p>
+                  </div>
+              </div>
+              <p className="stream-description-display">
+                  Saksikan pertandingan esports paling seru dari seluruh dunia! Dukung tim favoritmu dalam turnamen besar.
               </p>
-              {streamStatus && streamStatus.online && (
-                  <p>Penonton: {streamStatus.viewerCount}</p>
-              )}
+              <div className="stream-tags-container">
+                  {streamTags.map((tag, index) => (
+                      <span key={index} className="stream-tag-item">
+                          {tag}
+                      </span>
+                  ))}
+              </div>
           </div>
-        </div>
+        </div> 
+
         <ChatBox messages={messages} onSendMessage={handleSendMessage} />
       </div>
+      
+      <div className="alternative-links-section">
+        {alternativeLinks.map((link, index) => (
+          <a
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`alt-link-button ${link.isPrimary ? 'primary' : ''}`}
+          >
+            {link.icon}
+            <span>{link.text}</span>
+          </a>
+        ))}
+      </div>
+
+      <div className="promos-below-links-section">
+        <h4 className="section-title-promos">Promo Terbaru</h4>
+        <div className="promos-grid-below-links">
+          {latestPromos.map((promo) => (
+            <div key={promo.id} className="promo-card-below-links">
+              <img src={promo.imageUrl} alt={promo.title} className="promo-image-below-links" />
+              <div className="promo-content-below-links">
+                <h5 className="promo-title-below-links">{promo.title}</h5>
+                <p className="promo-excerpt-below-links">{promo.excerpt}</p>
+                <a href={promo.link} className="promo-button-below-links">Klaim!</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
     </div>
   );
 }

@@ -1,53 +1,35 @@
+// src/pages/LiveTogelPage.js
 import React, { useState, useEffect, useRef } from 'react';
 import ChatBox from '../components/ChatBox';
-import './PageStyles.css';
+import './PageStyles.css'; // Styling umum halaman
+import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa'; 
+import { FiLink, FiMessageCircle } from 'react-icons/fi'; 
+import { promoArticles } from '../data/promoData'; // Data promo untuk bagian bawah
 
-// URL dasar Owncast Anda. Ganti ini dengan URL OWNCAST ANDA YANG SEBENARNYA!
-const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/';
+const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; 
 
 function LiveTogelPage() {
-  const [messages, setMessages] = useState([
-    { id: 1, user: 'HostTogelBola88', text: 'Selamat malam! Mari kita mulai pengundian Togel Bola88.' },
-    { id: 2, user: 'PenontonC', text: 'Angka keberuntunganku hari ini pasti keluar!' },
-    { id: 3, user: 'LuckyGuy', text: 'Selamat kepada pemenang!' },
-  ]);
-  const [streamStatus, setStreamStatus] = useState(null);
+  const [messages, setMessages] = useState([]);
   const ws = useRef(null);
 
-  const handleSendMessage = (messageText) => {
+  const handleSendMessage = (username, messageText) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
       const message = {
         type: 'CHAT',
+        author: username,
         body: messageText,
       };
       ws.current.send(JSON.stringify(message));
     } else {
-      console.warn('WebSocket not connected. Message not sent.');
+      console.warn("WebSocket chat tidak terhubung. Pesan Anda hanya akan terlihat secara lokal.");
       setMessages((prevMessages) => [
         ...prevMessages,
-        { id: Date.now(), user: 'Anda (Offline)', text: messageText },
+        { id: Date.now(), user: `${username} (Anda - Offline)`, text: messageText }, 
       ]);
     }
   };
 
   useEffect(() => {
-    // 1. Ambil Status Stream
-    const fetchStreamStatus = async () => {
-      try {
-        const response = await fetch(`${OWNCAST_BASE_URL}/api/status`);
-        const data = await response.json();
-        setStreamStatus(data);
-        console.log("Owncast Status (Togel):", data);
-      } catch (error) {
-        console.error('Error fetching Owncast status (Togel):', error);
-        setStreamStatus(null);
-      }
-    };
-
-    fetchStreamStatus();
-    const statusInterval = setInterval(fetchStreamStatus, 30000);
-
-    // 2. Inisialisasi WebSocket Chat
     ws.current = new WebSocket(`${OWNCAST_BASE_URL}/ws`);
 
     ws.current.onopen = () => {
@@ -87,21 +69,27 @@ function LiveTogelPage() {
     };
 
     return () => {
-      clearInterval(statusInterval);
       if (ws.current) {
         ws.current.close();
       }
     };
   }, []);
 
+  const alternativeLinks = [
+    { text: 'Link Alternatif', icon: <FiLink />, url: 'https://linkalternatif.com', isPrimary: true }, 
+    { text: 'Telegram Bola88', icon: <FaTelegramPlane />, url: 'https://t.me/bola88resmi', isPrimary: false }, 
+    { text: 'Whatsapp Bola88', icon: <FaWhatsapp />, url: 'https://wa.me/628123456789', isPrimary: false }, 
+    { text: 'Livechat Bola88', icon: <FiMessageCircle />, url: 'https://livechat.bola88.com', isPrimary: false }, 
+  ];
+
+  const streamTags = ['Togel Online', 'Result', 'HK Pools', 'Singapore', 'Live Draw']; 
+  const latestPromos = promoArticles.slice(0, 2);
+
   return (
     <div className="page-container">
-      <h1 className="page-title">Live Togel</h1>
-      <p className="page-description">Lihat hasil undian togel terbaru secara langsung.</p>
-
       <div className="live-content-layout">
-        <div className="video-player-area">
-          <div className="video-placeholder">
+        <div className="video-player-and-info-frame">
+          <div className="video-placeholder"> 
             <iframe
               src={`${OWNCAST_BASE_URL}/embed/video`}
               title="Owncast Live Togel Stream"
@@ -112,19 +100,66 @@ function LiveTogelPage() {
             ></iframe>
           </div>
           <div className="stream-info">
-              <h3>
-                  {streamStatus && streamStatus.online ? streamStatus.streamTitle : 'Stream Tidak Tersedia'}
-              </h3>
-              <p>
-                  {streamStatus && streamStatus.online ? streamStatus.streamDescription : 'Tunggu live stream dimulai...'}
+              <div className="stream-info-header">
+                  <img 
+                      src="https://via.placeholder.com/50/3a3a3a/FFFFFF?text=T" /* Avatar Togel */
+                      alt="Profile Avatar"
+                      className="streamer-avatar"
+                  />
+                  <div className="stream-title-group">
+                      <h3 className="stream-title-display">
+                          Livestreaming Pengundian Togel Hari ini
+                      </h3>
+                      <p className="streamer-name">Togel Result Official</p>
+                  </div>
+              </div>
+              <p className="stream-description-display">
+                  Saksikan hasil pengundian togel terbaru secara langsung! Jangan lewatkan angka keberuntungan Anda.
               </p>
-              {streamStatus && streamStatus.online && (
-                  <p>Penonton: {streamStatus.viewerCount}</p>
-              )}
+              <div className="stream-tags-container">
+                  {streamTags.map((tag, index) => (
+                      <span key={index} className="stream-tag-item">
+                          {tag}
+                      </span>
+                  ))}
+              </div>
           </div>
-        </div>
+        </div> 
+
         <ChatBox messages={messages} onSendMessage={handleSendMessage} />
       </div>
+      
+      <div className="alternative-links-section">
+        {alternativeLinks.map((link, index) => (
+          <a
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`alt-link-button ${link.isPrimary ? 'primary' : ''}`}
+          >
+            {link.icon}
+            <span>{link.text}</span>
+          </a>
+        ))}
+      </div>
+
+      <div className="promos-below-links-section">
+        <h4 className="section-title-promos">Promo Terbaru</h4>
+        <div className="promos-grid-below-links">
+          {latestPromos.map((promo) => (
+            <div key={promo.id} className="promo-card-below-links">
+              <img src={promo.imageUrl} alt={promo.title} className="promo-image-below-links" />
+              <div className="promo-content-below-links">
+                <h5 className="promo-title-below-links">{promo.title}</h5>
+                <p className="promo-excerpt-below-links">{promo.excerpt}</p>
+                <a href={promo.link} className="promo-button-below-links">Klaim!</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
     </div>
   );
 }
