@@ -15,13 +15,35 @@
 }
 
 .card-thumbnail {
+  position: relative; /* Penting untuk positioning tag LIVE */
   width: 100%;
   height: 160px; /* Tinggi thumbnail */
   background-size: cover;
   background-position: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  /* Tambahkan background-color default jika gambar tidak ada */
+  background-color: #000;
 }
+
+.live-tag-card { /* Styling untuk tag LIVE di kartu */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--accent-red); /* Menggunakan warna aksen biru */
+  color: var(--text-light);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 1; /* Pastikan di atas thumbnail */
+}
+
+/* Hapus styling untuk .offline-tag-card jika tidak lagi digunakan */
+/* Hapus styling untuk .owncast-video-card-iframe jika tidak lagi digunakan */
+/* Hapus styling untuk .static-thumbnail-fallback jika tidak lagi digunakan */
+
 
 .card-info {
   padding: 15px;
@@ -34,7 +56,7 @@
   margin: 0 0 8px 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* ... jika teks terlalu panjang */
+  text-overflow: ellipsis;
 }
 
 .card-streamer {
@@ -53,12 +75,10 @@
 }
 
 .video-card-link {
-  text-decoration: none; /* Hapus garis bawah link */
-  color: inherit; /* Warisi warna teks dari parent */
+  text-decoration: none;
+  color: inherit;
 }
-
-/* Anda juga bisa memindahkan efek hover dari .video-card ke .video-card-link jika diinginkan */
-.video-card-link:hover .video-card { /* Contoh: hover pada link mempengaruhi kartu di dalamnya */
+.video-card-link:hover .video-card {
   transform: translateY(-5px);
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }

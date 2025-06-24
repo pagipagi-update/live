@@ -1,19 +1,24 @@
 import React from 'react';
+import { FaBars } from 'react-icons/fa'; // Impor ikon hamburger
 import './Header.css';
 
-function Header() {
+// Header sekarang menerima prop toggleSidebar
+function Header({ toggleSidebar }) {
   const handleVisitWebsite = () => {
-    // Ganti URL ini dengan URL situs utama yang kamu inginkan
-    window.open('https://www.google.com', '_blank');
+    window.open('https://www.google.com', '_blank'); // Ganti URL ini
   };
 
   return (
     <header className="header-container">
-      {/* Kiri/Tengah: Teks Berjalan */}
+      {/* Tombol Hamburger di kiri atas */}
+      <div className="header-left-menu">
+        <FaBars className="menu-toggle-icon" onClick={toggleSidebar} />
+      </div>
+
+      {/* Tengah: Teks Berjalan */}
       <div className="header-marquee-area">
         <marquee behavior="scroll" direction="left" scrollamount="5">
           Selamat datang di Bola88! Nikmati berbagai live stream olahraga, esports, slot, dan togel sekarang juga! Jangan lewatkan event spesial setiap hari!
-          {/* UBAH INI: Teks marquee diubah */}
         </marquee>
       </div>
 

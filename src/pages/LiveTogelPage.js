@@ -3,7 +3,7 @@ import ChatBox from '../components/ChatBox';
 import './PageStyles.css';
 
 // URL dasar Owncast Anda. Ganti ini dengan URL OWNCAST ANDA YANG SEBENARNYA!
-const OWNCAST_BASE_URL = 'http://tipi.abong4star.space:8080/';
+const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/';
 
 function LiveTogelPage() {
   const [messages, setMessages] = useState([

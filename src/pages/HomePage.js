@@ -1,12 +1,16 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import ContinueWatchingSection from '../components/ContinueWatchingSection';
+import QuickAccessMenu from '../components/QuickAccessMenu';
+import LatestPromosHomepage from '../components/LatestPromosHomepage'; // IMPOR KOMPONEN BARU INI
 
 function HomePage() {
   return (
     <>
-      <HeroSection /> {/* Ini juga akan menggunakan gambar placeholder baru jika ada */}
-      <ContinueWatchingSection /> {/* Akan diperbarui dari dalamnya */}
+      <HeroSection />
+      <ContinueWatchingSection />
+      <QuickAccessMenu />
+      <LatestPromosHomepage /> {/* TAMBAHKAN KOMPONEN INI DI SINI */}
     </>
   );
 }

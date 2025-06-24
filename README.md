@@ -68,3 +68,107 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+Bola88 Livestreaming App
+Aplikasi web livestreaming frontend yang dibangun dengan React.js, terintegrasi dengan Owncast untuk live video dan fitur chat. Desain mengadopsi tema gelap modern dengan aksen warna biru (#1698CE).
+
+Fitur Utama
+Header Dinamis: Teks berjalan dengan pesan selamat datang dan tombol "Kunjungi Situs Utama" di pojok kanan.
+Sidebar Navigasi: Navigasi vertikal dengan kategori live stream (Live Sports, Live Esports, Live Slots, Live Togel, Playlist, Home).
+Promotional Banner: Area khusus di sidebar untuk banner promosi vertikal.
+Homepage: Menampilkan Hero Section utama dan bagian "Live Now" dengan kartu yang dapat diklik untuk setiap kategori.
+Halaman Kategori Live: Setiap kategori memiliki halaman khusus yang menampilkan:
+Video Live Owncast: Menggunakan <iframe> untuk menampilkan stream video dari server Owncast Anda.
+Live Chat: Chatbox interaktif yang terhubung ke WebSocket chat Owncast, memungkinkan pesan real-time.
+Stream Info: Menampilkan judul stream, deskripsi, dan jumlah penonton secara dinamis dari Owncast API.
+Teknologi yang Digunakan
+React.js: Library JavaScript untuk membangun antarmuka pengguna.
+React Router DOM: Untuk navigasi antar halaman dalam aplikasi Single Page Application (SPA).
+React Icons: Koleksi ikon populer untuk React.
+CSS Modules (atau plain CSS): Untuk styling komponen.
+Owncast API & WebSocket: Untuk integrasi video live, chat, dan status stream.
+Prasyarat
+Sebelum memulai, pastikan Anda memiliki hal-hal berikut terinstal di sistem Anda:
+
+Node.js & npm: Download Node.js (npm akan terinstal bersama Node.js).
+Git: Download Git.
+Server Owncast yang Berjalan: Pastikan Anda memiliki instance Owncast yang sedang berjalan dan dapat diakses (misalnya, di http://localhost:8080 atau URL publik Anda).
+Panduan Setup dan Menjalankan Proyek
+Ikuti langkah-langkah di bawah ini untuk mendapatkan salinan proyek dan menjalankannya di mesin lokal Anda.
+
+1. Clone Repositori
+Buka terminal atau command prompt dan clone repositori proyek dari GitHub:
+
+Bash
+
+git clone https://github.com/YOUR_USERNAME/REPOSITORY_NAME.git
+Ganti YOUR_USERNAME dengan username GitHub Anda dan REPOSITORY_NAME dengan nama repositori proyek Anda di GitHub.
+
+2. Navigasi ke Direktori Proyek
+Masuk ke folder proyek yang baru saja Anda clone:
+
+Bash
+
+cd REPOSITORY_NAME
+Misalnya: cd bola88-livestreaming-app
+
+3. Instal Dependensi
+Instal semua paket dependensi yang dibutuhkan oleh proyek:
+
+Bash
+
+npm install
+4. Konfigurasi Owncast URL
+Aplikasi ini terintegrasi dengan Owncast. Anda perlu mengatur URL dasar Owncast Anda di setiap file halaman live stream.
+
+Buka file-file berikut di editor kode Anda:
+src/pages/LiveSportsPage.js
+src/pages/LiveEsportsPage.js
+src/pages/LiveSlotsPage.js
+src/pages/LiveTogelPage.js
+Di bagian atas setiap file, cari baris berikut:
+JavaScript
+
+const OWNCAST_BASE_URL = 'http://localhost:8080'; // GANTI INI DENGAN URL OWNCAST ANDA!
+Ganti 'http://localhost:8080' dengan URL Owncast Anda yang sebenarnya (misalnya, 'https://live.example.com' atau 'http://192.168.1.100:8080').
+5. Jalankan Aplikasi
+Setelah konfigurasi selesai, Anda bisa menjalankan aplikasi React dalam mode pengembangan:
+
+Bash
+
+npm start
+Aplikasi akan terbuka di browser default Anda (biasanya di http://localhost:3000).
+
+Struktur Proyek
+livestreaming-app-bola88/
+├── public/                 # File statis (HTML, ikon)
+├── src/
+│   ├── components/         # Komponen React yang dapat digunakan kembali (Header, Sidebar, ChatBox, VideoCard dll.)
+│   │   ├── Header.js
+│   │   ├── Header.css
+│   │   ├── Sidebar.js
+│   │   ├── Sidebar.css
+│   │   ├── HeroSection.js
+│   │   ├── HeroSection.css
+│   │   ├── VideoCard.js
+│   │   ├── VideoCard.css
+│   │   ├── ChatBox.js
+│   │   └── ChatBox.css
+│   ├── pages/              # Komponen halaman utama (tampilan penuh)
+│   │   ├── HomePage.js
+│   │   ├── LiveSportsPage.js
+│   │   ├── LiveEsportsPage.js
+│   │   ├── LiveSlotsPage.js
+│   │   ├── LiveTogelPage.js
+│   │   └── PageStyles.css  # Styling umum untuk halaman
+│   ├── App.js              # Komponen utama aplikasi & konfigurasi React Router
+│   ├── App.css             # Styling global untuk layout App
+│   ├── index.js            # Titik masuk utama aplikasi React
+│   └── index.css           # Styling CSS global (variabel warna, reset CSS)
+├── .gitignore              # File dan folder yang diabaikan Git
+├── package.json            # Daftar dependensi dan script proyek
+├── README.md               # File ini!
+└── ...
+Kontribusi
+Jika Anda ingin berkontribusi pada proyek ini, silakan fork repositori, buat branch baru, lakukan perubahan Anda, dan ajukan Pull Request.

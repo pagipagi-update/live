@@ -1,24 +1,34 @@
+// src/components/Sidebar.js
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaFutbol, FaGamepad, FaDice, FaCoins  } from 'react-icons/fa';
-import { FiList, FiHome  } from 'react-icons/fi';
+// Impor FaTags untuk ikon promo
+import { FaFutbol, FaGamepad, FaDice, FaCoins, FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaTags } from 'react-icons/fa'; 
 import './Sidebar.css';
 
-function Sidebar() {
+function Sidebar({ isSidebarOpen }) {
   const location = useLocation();
 
   const navigationItems = [
-    { name: 'Home', icon: <FiHome/>, path: '/' },
+    { name: 'Home', icon: <FaFutbol />, path: '/' },
     { name: 'Live Sports', icon: <FaFutbol />, path: '/live-sports' },
     { name: 'Live Esports', icon: <FaGamepad />, path: '/live-esports' },
     { name: 'Live Slots', icon: <FaDice />, path: '/live-slots' },
-    { name: 'Live Togel', icon: <FaCoins />, path: '/live-togel' },    
+    { name: 'Live Togel', icon: <FaCoins />, path: '/live-togel' },
+    // UBAH INI: Berita Terbaru menjadi Promo Terbaru
+    { name: 'Promo Terbaru', icon: <FaTags />, path: '/promo-terbaru' }, // Path baru
+  ];
+
+  const socialMediaItems = [
+    { name: 'Facebook', icon: <FaFacebook />, link: 'https://facebook.com', color: '#1877F2' },
+    { name: 'Twitter', icon: <FaTwitter />, link: 'https://twitter.com', color: '#1DA1F2' },
+    { name: 'Instagram', icon: <FaInstagram />, link: 'https://instagram.com', color: '#E4405F' },
+    { name: 'YouTube', icon: <FaYoutube />, link: 'https://youtube.com', color: '#FF0000' },
   ];
 
   return (
-    <aside className="sidebar-container">
+    <aside className={`sidebar-container ${isSidebarOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-header">
-        <span className="logo-small">Bola88</span> {/* UBAH INI: Nama brand di sidebar */}
+        <span className="logo-small">Bola88</span>
       </div>
 
       <nav className="sidebar-nav">
@@ -37,13 +47,30 @@ function Sidebar() {
         </ul>
       </nav>
 
-      {/* Bagian untuk banner vertikal */}
       <div className="sidebar-banner-area">
         <img
-          src="https://via.placeholder.com/280x400/1698CE/FFFFFF?text=PROMO+BANNER+BOLA88" /* UBAH INI: Warna dan teks banner placeholder */
+          src="https://premicloud.net/banner/image/promotion/Bola88_Referral_SquareBanner.webp"
           alt="Promotion Banner"
           className="promo-banner"
         />
+      </div>
+
+      <div className="social-media-section">
+        <h4 className="social-media-title">Ikuti Kami</h4>
+        <div className="social-icons-container">
+          {socialMediaItems.map((item) => (
+            <a 
+              key={item.name} 
+              href={item.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="social-icon-link"
+              style={{ '--social-color': item.color }}
+            >
+              {item.icon}
+            </a>
+          ))}
+        </div>
       </div>
     </aside>
   );

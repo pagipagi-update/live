@@ -1,0 +1,111 @@
+/* src/components/Footer.css */
+
+.footer-container {
+    background-color: var(--sidebar-dark); /* Warna gelap untuk footer */
+    color: var(--text-gray);
+    padding: 40px 20px 20px; /* Padding atas, samping, bawah */
+    border-top: 1px solid var(--border-color); /* Garis pemisah dari konten atas */
+    margin-top: 50px; /* Jarak dari section terakhir di atasnya */
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-around; /* Menyebarkan kolom-kolom */
+    flex-wrap: wrap; /* Mengizinkan wrap di layar kecil */
+    gap: 30px; /* Jarak antar kolom */
+    max-width: 1200px; /* Batasi lebar konten footer */
+    margin: 0 auto; /* Pusatkan konten footer */
+    margin-bottom: 30px; /* Jarak sebelum bagian footer-bottom */
+  }
+  
+  .footer-brand,
+  .footer-links,
+  .footer-social {
+    flex: 1; /* Fleksibel untuk pertumbuhan */
+    min-width: 200px; /* Lebar minimum per kolom */
+  }
+  
+  .footer-brand .logo-text-footer {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .footer-brand .footer-tagline {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  .footer-links h4,
+  .footer-social h4 {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-links a:hover {
+    color: var(--accent-red); /* Warna aksen saat hover */
+  }
+  
+  .social-icons-footer {
+    display: flex;
+    gap: 15px; /* Jarak antar ikon sosial media */
+  }
+  
+  .social-icons-footer .footer-social-icon { /* Styling untuk ikon react-icons */
+    color: var(--text-gray);
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+  }
+  
+  .social-icons-footer a:hover .footer-social-icon {
+    color: var(--accent-red); /* Warna aksen saat hover */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid #2a2a2a; /* Garis pemisah bawah */
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-brand,
+    .footer-links,
+    .footer-social {
+      min-width: unset;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .social-icons-footer {
+      justify-content: center;
+    }
+  }

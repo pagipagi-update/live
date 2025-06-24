@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'; // Tambahkan useRef
 import ChatBox from '../components/ChatBox';
 import './PageStyles.css';
 
-const OWNCAST_BASE_URL = 'http://tipi.abong4star.space:8080/'; // GANTI DENGAN URL OWNCAST ANDA!
+const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; // GANTI DENGAN URL OWNCAST ANDA!
 
 function LiveSportsPage() {
   const [messages, setMessages] = useState([]); // Mulai dengan array kosong, pesan akan datang dari Owncast

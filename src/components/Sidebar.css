@@ -1,16 +1,34 @@
 /* src/components/Sidebar.css */
 .sidebar-container {
-  width: 340px; /* UBAH INI: Lebar sidebar baru */
+  width: 320px; /* Lebar sidebar */
   background-color: var(--sidebar-dark);
   padding: 20px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-color);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  
+  /* Animasi Drawer */
+  position: fixed; /* Jadikan fixed agar bisa keluar masuk layar */
+  height: 100vh; /* Mengambil tinggi penuh viewport */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Pastikan di atas konten lain */
+  transition: transform 0.3s ease-in-out; /* Transisi untuk efek drawer */
+  transform: translateX(0); /* Posisi default (terbuka) */
 }
 
+/* Sidebar saat DITUTUP */
+.sidebar-container.closed {
+  transform: translateX(-100%); /* Geser sidebar keluar layar ke kiri */
+  /* Untuk layar besar, tambahkan margin-left negatif di App.css untuk mengisi ruang */
+}
 
-/* ... (sisa kode CSS Sidebar.css lainnya tetap sama) ... */
+/* Sidebar saat DIBUKA */
+.sidebar-container.open {
+  transform: translateX(0); /* Geser sidebar kembali ke dalam layar */
+}
+
 
 .sidebar-header {
   margin-bottom: 30px;
@@ -19,7 +37,7 @@
 
 .sidebar-header .logo-small {
   font-weight: 700;
-  font-size: 1.8rem; /* UBAH INI: Ukuran font logo baru */
+  font-size: 1.8rem;
   color: var(--text-light);
 }
 
@@ -51,7 +69,7 @@
 }
 
 .sidebar-nav .nav-item:hover {
-  background-color: rgba(var(--accent-red), 0.2); /* Sedikit transparansi merah */
+  background-color: rgba(var(--accent-red), 0.2);
   color: var(--text-light);
 }
 
@@ -61,37 +79,89 @@
 }
 
 .sidebar-nav .nav-item.active svg {
-  color: var(--text-light); /* Ikon juga putih jika aktif */
+  color: var(--text-light);
 }
 
-/* Bagian untuk banner vertikal */
+.sidebar-nav .nav-item a { /* Styling untuk Link di dalam nav-item */
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Following Section (dihapus, diganti banner) */
+
+
 .sidebar-banner-area {
-  flex-grow: 1; /* Agar banner mengambil sisa ruang yang tersedia */
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
-  align-items: center; /* Pusatkan banner secara vertikal */
-  padding: 20px 0; /* Padding atas bawah untuk memberi sedikit jarak */
-  margin-top: 30px; /* Jarak dari navigasi utama */
-  border-top: 1px solid var(--border-color); /* Garis pemisah dari navigasi */
-  /* Remove border-bottom for now, or add if needed */
+  align-items: center;
+  margin-bottom: 30px; /* Jarak antara banner dan sosial media */
 }
 
 .promo-banner {
-  width: 100%; /* Pastikan banner mengisi lebar yang tersedia dalam area banner */
-  max-width: 210px; /* Lebar maksimum banner */
-  height: auto; /* Jaga rasio aspek */
+  width: 100%;
+  max-width: 280px; /* Sesuaikan agar pas dengan lebar sidebar 320px dan padding */
+  height: auto;
   border-radius: 8px;
-  object-fit: cover; /* Memastikan gambar pas tanpa terdistorsi */
+  object-fit: cover;
 }
 
-/* Hapus semua styling untuk following section dan footer di sini */
-/* Contoh yang dihapus (jangan sertakan ini di filemu):
-.following-section { ... }
-.following-title { ... }
-.following-list { ... }
-.following-item { ... }
-.online-dot { ... }
-.load-more-btn { ... }
-.sidebar-footer { ... }
-.sidebar-footer-item { ... }
-*/
+/* Bagian Kumpulan Sosial Media */
+.social-media-section {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+  margin-top: auto; /* Mendorong section ini ke bagian bawah sidebar */
+  text-align: center;
+}
+
+.social-media-title {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.social-icons-container {
+  display: flex;
+  justify-content: center; /* Pusatkan ikon */
+  gap: 15px; /* Jarak antar ikon */
+}
+
+.social-icon-link {
+  color: var(--text-light); /* Warna default ikon */
+  font-size: 1.8rem; /* Ukuran ikon */
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 5px; /* Area klik */
+  display: flex; /* Untuk memusatkan ikon dalam area klik */
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon-link:hover {
+  color: var(--accent-red); /* Warna aksen saat hover */
+  transform: translateY(-3px); /* Efek sedikit naik */
+}
+
+/* Responsif untuk layar kecil: Sidebar akan menumpuk di atas konten */
+@media (max-width: 992px) {
+  .sidebar-container {
+    transform: translateX(-100%); /* Defaultnya tertutup di layar kecil */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5); /* Shadow lebih kuat saat drawer */
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0); /* Terbuka penuh di layar kecil */
+  }
+
+  .main-content-wrapper.sidebar-open {
+      margin-left: 0; /* Konten utama tidak didorong di layar kecil */
+  }
+}
