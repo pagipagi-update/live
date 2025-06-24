@@ -2,8 +2,22 @@
 .app-container {
   display: flex;
   min-height: 100vh;
-  /* Tambahkan overflow-x: hidden untuk mencegah scrollbar horizontal saat drawer tertutup */
-  overflow-x: hidden; 
+  overflow-x: hidden;
+  position: relative; /* Penting untuk positioning backdrop */
+}
+
+/* Styling untuk BACKDROP (Overlay Gelap) */
+.sidebar-backdrop {
+    position: fixed; /* Posisi tetap agar menutupi seluruh viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Mengisi seluruh lebar viewport */
+    height: 100vh; /* Mengisi seluruh tinggi viewport */
+    background-color: rgba(0, 0, 0, 0.5); /* Warna gelap semi-transparan */
+    z-index: 998; /* Di bawah sidebar (yang z-index-nya 1000) tapi di atas konten utama */
+    cursor: pointer; /* Menandakan bisa diklik */
+    transition: opacity 0.3s ease-in-out; /* Animasi fade halus */
+    opacity: 1; /* Pastikan terlihat saat muncul */
 }
 
 .main-content-wrapper {
@@ -11,16 +25,16 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  /* Animasi pergeseran untuk konten utama */
+  background-color: var(--background-dark);
   transition: margin-left 0.3s ease-in-out; 
 }
 
-/* JIKA sidebar terbuka, dorong main-content-wrapper */
+/* Desktop: Sidebar open, push content */
 .main-content-wrapper.sidebar-open {
-  margin-left: 320px; /* Lebar sidebar */
+  margin-left: 320px; 
 }
 
-/* JIKA sidebar tertutup, main-content-wrapper ada di posisi normal */
+/* Desktop: Sidebar closed, content normal */
 .main-content-wrapper.sidebar-closed {
   margin-left: 0;
 }
@@ -30,12 +44,34 @@
   padding-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 40px; 
 }
 
-/* Responsif untuk layar kecil: Sidebar akan menumpuk di atas konten */
+/* --- Responsive Adjustments --- */
+/* Untuk layar lebih kecil dari 992px (misal: Tablet, Mobile Landscape) */
 @media (max-width: 992px) {
+    .main-content-wrapper {
+        padding: 15px;
+    }
     .main-content-wrapper.sidebar-open {
-        margin-left: 0; /* Tidak mendorong konten di layar kecil */
+        margin-left: 0; /* Sidebar menumpuk di atas di layar kecil */
+    }
+    .main-content-area {
+        gap: 30px;
+    }
+    /* Backdrop hanya diaktifkan di App.js saat isMobileMode && isSidebarOpen */
+    /* Styling untuk backdrop: Pastikan terlihat di mobile */
+    .sidebar-backdrop {
+        display: block; /* Pastikan backdrop terlihat, karena defaultnya bisa jadi hidden di dev tools */
+    }
+}
+
+/* Untuk layar lebih kecil dari 480px (misal: Ponsel Portrait) */
+@media (max-width: 480px) {
+    .main-content-wrapper {
+        padding: 10px;
+    }
+    .main-content-area {
+        gap: 25px;
     }
 }

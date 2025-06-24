@@ -1,8 +1,8 @@
 /* src/components/QuickAccessMenu.css */
 
 .quick-access-section {
-  margin-top: 50px; /* Jarak dari section di atasnya */
-  padding: 0; /* DIHAPUS: padding horizontal agar konten menyelaraskan dengan parent .main-content-area */
+  margin-top: 50px;
+  padding: 0 20px; /* Padding horizontal konsisten */
 }
 
 .quick-access-title {
@@ -10,24 +10,23 @@
   font-weight: 700;
   color: var(--text-light);
   margin-bottom: 25px;
-  text-align: left; /* UBAH INI: Judul diselaraskan ke kiri */
-  /* Margin-left tidak diperlukan jika .main-content-area sudah memiliki padding */
+  text-align: left;
 }
 
 .quick-access-menu-container {
   display: flex;
-  justify-content: space-between; /* UBAH INI: Mendistribusikan item untuk memenuhi lebar */
-  flex-wrap: wrap; /* Izinkan tombol untuk wrap ke baris berikutnya di layar kecil */
-  gap: 20px; /* Jarak antar tombol */
-  padding: 20px; /* Padding di dalam kontainer menu */
-  background-color: var(--sidebar-dark); /* Latar belakang menu */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--card-background);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 100%; /* Pastikan kontainer mengambil lebar penuh yang tersedia */
+  box-shadow: var(--soft-shadow);
+  width: 100%;
 }
 
 .quick-access-button {
-  background-color: var(--accent-red); /* UBAH INI: Warna utama tombol menjadi aksen biru */
+  background-color: var(--primary-blue);
   color: var(--text-light);
   border: none;
   padding: 15px 20px;
@@ -39,48 +38,46 @@
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   
   display: flex; 
-  align-items: center; /* Pusatkan secara vertikal */
-  justify-content: center; /* Pusatkan konten (teks & ikon) di dalam tombol */
-  gap: 10px; /* Jarak antara teks dan ikon */
-  white-space: nowrap; /* Pastikan teks tidak pecah baris */
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  white-space: nowrap;
   
-  /* BARU: Properti flex untuk membuat tombol mengisi kolom */
-  flex: 1; /* Izinkan tombol untuk tumbuh dan menyusut */
-  min-width: 180px; /* Lebar minimum agar tombol tidak terlalu kecil */
-  /* max-width untuk 4 kolom dengan gap: calc((100% - (3 * 20px)) / 4) */
-  max-width: calc(25% - 15px); /* Batasi lebar untuk 4 item per baris dengan gap 20px (20px * 3 gap = 60px / 4 items = 15px per item) */
+  flex: 1;
+  min-width: 180px;
+  max-width: calc(25% - 15px); /* Untuk 4 kolom di desktop */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .quick-access-button:hover {
-  background-color: #0d7ea8; /* UBAH INI: Sedikit lebih gelap dari aksen biru saat hover */
+  background-color: var(--light-blue);
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(var(--accent-red), 0.4);
+  box-shadow: var(--soft-shadow);
 }
 
-/* Styling untuk Ikon */
 .quick-access-button .menu-icon {
-  font-size: 1.4rem; /* Ukuran ikon */
-  color: var(--text-light); /* Warna ikon */
+  font-size: 1.4rem;
+  color: var(--text-light);
   transition: color 0.3s ease;
 }
 
 .quick-access-button:hover .menu-icon {
-    color: var(--text-light); /* Tetap putih saat hover */
+    color: var(--text-light);
 }
 
-
-/* Responsif untuk layar kecil */
-@media (max-width: 992px) { /* Untuk tablet lebih lebar */
+/* --- Responsive Adjustments --- */
+/* Untuk layar lebih kecil dari 992px */
+@media (max-width: 992px) {
   .quick-access-button {
-    max-width: calc(50% - 10px); /* Dua tombol per baris (gap 20px, 10px per sisi) */
-    font-size: 1.05rem; /* Sedikit perkecil font */
+    max-width: calc(50% - 10px); /* Dua tombol per baris di tablet lebar */
+    font-size: 1.05rem;
   }
 }
 
-@media (max-width: 768px) { /* Untuk tablet dan mobile */
+/* Untuk layar lebih kecil dari 768px */
+@media (max-width: 768px) {
   .quick-access-section {
-    margin-top: 30px;
-    /* padding diatur oleh parent App.css */
+    padding: 0 15px; /* Padding lebih kecil */
   }
   .quick-access-title {
     font-size: 1.5rem;
@@ -88,23 +85,24 @@
   }
   .quick-access-menu-container {
     padding: 15px;
-    gap: 15px; /* Kurangi gap untuk layar kecil */
+    gap: 15px; /* Jarak antar tombol lebih kecil */
   }
   .quick-access-button {
     padding: 12px 15px;
     font-size: 1rem;
-    min-width: unset; /* Hapus min-width tetap */
-    max-width: calc(50% - 7.5px); /* Dua tombol per baris (gap 15px, 7.5px per sisi) */
+    min-width: unset; /* Hapus min-width */
+    max-width: calc(50% - 7.5px); /* Dua tombol per baris di mobile */
   }
   .quick-access-button .menu-icon {
     font-size: 1.2rem;
   }
 }
 
-@media (max-width: 480px) { /* Untuk ponsel */
+/* Untuk layar lebih kecil dari 480px (Ponsel) */
+@media (max-width: 480px) {
   .quick-access-button {
     max-width: 100%; /* Satu tombol per baris */
     padding: 12px 20px;
-    justify-content: center; /* Pastikan konten di tengah */
+    justify-content: center;
   }
 }

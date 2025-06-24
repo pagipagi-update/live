@@ -1,49 +1,43 @@
 /* src/components/VideoCard.css */
 .video-card {
-  width: 280px; /* Lebar kartu */
+  width: 280px;
   background-color: var(--card-background);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--soft-shadow);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .video-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--deep-shadow);
 }
 
 .card-thumbnail {
-  position: relative; /* Penting untuk positioning tag LIVE */
+  position: relative;
   width: 100%;
-  height: 160px; /* Tinggi thumbnail */
+  height: 160px;
   background-size: cover;
   background-position: center;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  /* Tambahkan background-color default jika gambar tidak ada */
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
   background-color: #000;
 }
 
-.live-tag-card { /* Styling untuk tag LIVE di kartu */
+.live-tag-card {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: var(--accent-red); /* Menggunakan warna aksen biru */
+  background-color: var(--primary-blue);
   color: var(--text-light);
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  z-index: 1; /* Pastikan di atas thumbnail */
+  z-index: 1;
 }
-
-/* Hapus styling untuk .offline-tag-card jika tidak lagi digunakan */
-/* Hapus styling untuk .owncast-video-card-iframe jika tidak lagi digunakan */
-/* Hapus styling untuk .static-thumbnail-fallback jika tidak lagi digunakan */
-
 
 .card-info {
   padding: 15px;
@@ -69,7 +63,7 @@
 .card-streamer .online-dot-small {
   width: 6px;
   height: 6px;
-  background-color: #4CAF50; /* Hijau untuk online */
+  background-color: #4CAF50;
   border-radius: 50%;
   margin-left: 8px;
 }
@@ -80,5 +74,24 @@
 }
 .video-card-link:hover .video-card {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--deep-shadow);
+}
+
+/* --- Responsive Adjustments --- */
+/* Untuk layar lebih kecil dari 768px */
+@media (max-width: 768px) {
+  .video-card {
+    width: 100%; /* Ambil lebar penuh di mobile */
+    max-width: 350px; /* Batasi lebar agar tidak terlalu besar di tengah */
+    margin: 0 auto; /* Pusatkan kartu */
+  }
+  .card-thumbnail {
+    height: 180px; /* Sedikit lebih tinggi */
+  }
+  .card-title {
+      font-size: 1rem;
+  }
+  .card-streamer {
+      font-size: 0.85rem;
+  }
 }

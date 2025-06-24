@@ -1,131 +1,133 @@
 /* src/components/LatestPromosHomepage.css */
 
 .latest-promos-homepage-section {
-    margin-top: 50px; /* Jarak dari section di atasnya */
-    padding: 0 20px; /* Padding samping untuk menyelaraskan dengan konten utama */
+  margin-top: 50px;
+  padding: 0 20px; /* Padding horizontal konsisten */
+}
+
+.section-header-homepage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.homepage-section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.view-all-button {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-gray);
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.view-all-button:hover {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border-color: var(--primary-blue);
+}
+
+.promos-grid-homepage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Dua kolom atau lebih */
+  gap: 30px;
+}
+
+.promo-card-homepage {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--soft-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo-card-homepage:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--deep-shadow);
+}
+
+.promo-card-image-homepage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.promo-card-content-homepage {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.promo-card-title-homepage {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-top: 0;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.promo-card-excerpt-homepage {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  margin-bottom: 15px;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.claim-button-homepage {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.claim-button-homepage:hover {
+  background-color: var(--light-blue);
+}
+
+/* --- Responsive Adjustments --- */
+/* Untuk layar lebih kecil dari 768px */
+@media (max-width: 768px) {
+  .latest-promos-homepage-section {
+    padding: 0 15px; /* Padding lebih kecil */
   }
-  
-  .section-header-homepage {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-  }
-  
   .homepage-section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-light);
-    margin: 0;
+    font-size: 1.5rem;
   }
-  
-  .view-all-button {
-    background-color: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-gray);
-    padding: 8px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-  
-  .view-all-button:hover {
-    background-color: var(--accent-red);
-    color: var(--text-light);
-    border-color: var(--accent-red);
-  }
-  
   .promos-grid-homepage {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Dua kolom atau lebih */
-    gap: 30px; /* Jarak antar kartu promo */
+    grid-template-columns: 1fr; /* Satu kolom di mobile */
+    gap: 20px;
   }
-  
-  .promo-card-homepage {
-    background-color: var(--card-background);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .promo-card-homepage:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-  }
-  
   .promo-card-image-homepage {
-    width: 100%;
-    height: 200px; /* Tinggi gambar promo */
-    object-fit: cover;
-    display: block;
+    height: 160px;
   }
-  
-  .promo-card-content-homepage {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .promo-card-title-homepage {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--text-light);
-    margin-top: 0;
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-  
-  .promo-card-excerpt-homepage {
-    font-size: 0.95rem;
-    color: var(--text-gray);
-    margin-bottom: 15px;
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  
-  .claim-button-homepage {
-    background-color: var(--accent-red);
-    color: var(--text-light);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.2s ease;
-    align-self: flex-start;
-    white-space: nowrap;
-  }
-  
-  .claim-button-homepage:hover {
-    background-color: #0d7ea8;
-  }
-  
-  /* Responsif */
-  @media (max-width: 768px) {
-    .latest-promos-homepage-section {
-      padding: 0 15px;
-    }
-    .homepage-section-title {
-      font-size: 1.5rem;
-    }
-    .promos-grid-homepage {
-      grid-template-columns: 1fr; /* Satu kolom di layar kecil */
-      gap: 20px;
-    }
-    .promo-card-image-homepage {
-      height: 160px;
-    }
-  }
+}

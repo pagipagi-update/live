@@ -5,8 +5,8 @@
   width: 100%;
   height: 450px; /* Tinggi Hero Section (slider). Sesuaikan jika perlu. */
   border-radius: 12px;
-  overflow: hidden; /* Penting untuk menyembunyikan bagian slide yang tidak aktif dan menjaga border-radius */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  box-shadow: var(--deep-shadow);
 }
 
 .slider-container {
@@ -21,50 +21,39 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover; /* Gambar akan menutupi seluruh area slide */
+  background-size: cover;
   background-position: center;
-  opacity: 0; /* Semua slide tidak aktif awalnya tidak terlihat */
-  transition: opacity 0.8s ease-in-out; /* Animasi fade */
-  z-index: 1; /* Di bawah tombol navigasi */
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 1;
 }
 
 .slide.active {
-  opacity: 1; /* Slide aktif akan terlihat */
-  z-index: 2; /* Slide aktif di atas slide tidak aktif */
+  opacity: 1;
+  z-index: 2;
 }
 
 .slide-link {
-    display: block; /* Pastikan link mengisi seluruh area slide */
-    width: 100%;
-    height: 100%;
-    text-decoration: none; /* Hapus underline default link */
-}
-
-/* Jika Anda ingin menggunakan elemen <img> langsung di dalam slide: */
-/*
-.banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
 }
-*/
 
-/* Opsi: Overlay di atas banner (jika ingin menambahkan teks/tombol) */
 .slide-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%); /* Gradient gelap di bawah */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
     padding: 30px;
     color: var(--text-light);
-    opacity: 1; /* Bisa diatur opacity 0 dan fade-in saat hover jika mau */
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
@@ -74,16 +63,16 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+  background-color: rgba(0, 0, 0, 0.4);
   color: var(--text-light);
   border: none;
   padding: 15px;
   cursor: pointer;
   font-size: 2rem;
-  line-height: 1; /* Menghilangkan spasi ekstra di sekitar panah */
-  z-index: 3; /* Pastikan di atas slide */
-  border-radius: 50%; /* Bentuk bulat */
-  width: 50px; /* Ukuran bulat */
+  line-height: 1;
+  z-index: 3;
+  border-radius: 50%;
+  width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -93,7 +82,7 @@
 
 .prev-button:hover,
 .next-button:hover {
-  background-color: var(--accent-red); /* Warna aksen saat hover */
+  background-color: var(--primary-blue);
 }
 
 .prev-button {
@@ -111,20 +100,56 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Jarak antar dot */
-  z-index: 3; /* Pastikan di atas slide */
+  gap: 10px;
+  z-index: 3;
 }
 
 .dot {
   width: 10px;
   height: 10px;
-  background-color: rgba(255, 255, 255, 0.5); /* Warna dot tidak aktif */
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dot.active {
-  background-color: var(--accent-red); /* Warna dot aktif */
-  transform: scale(1.2); /* Sedikit membesar saat aktif */
+  background-color: var(--primary-blue);
+  transform: scale(1.2);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 300px; /* Kurangi tinggi hero section di mobile */
+    }
+    .slide-overlay {
+        padding: 20px; /* Kurangi padding overlay */
+    }
+    .prev-button, .next-button {
+        width: 40px; /* Tombol navigasi lebih kecil */
+        height: 40px;
+        font-size: 1.5rem;
+        padding: 10px;
+    }
+    .prev-button { left: 10px; }
+    .next-button { right: 10px; }
+    .dots-container {
+        bottom: 10px; /* Dots lebih dekat ke bawah */
+        gap: 8px;
+    }
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        height: 250px; /* Lebih kecil lagi di ponsel */
+        border-radius: 8px; /* Lebih kecil radiusnya */
+    }
+    .slide-overlay {
+        padding: 15px;
+    }
 }

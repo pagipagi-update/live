@@ -1,65 +1,112 @@
 /* src/components/Header.css */
 .header-container {
   display: flex;
-  justify-content: space-between; /* Menyebarkan item ke kiri dan kanan */
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: var(--background-dark);
+  padding: 10px 0; /* Padding horizontal akan diatur oleh main-content-wrapper */
+  background-color: var(--sidebar-dark);
   border-bottom: 1px solid var(--border-color);
-  height: 60px; /* Tinggi header tetap */
-  overflow: hidden; /* Penting untuk marquee agar tidak meluber */
+  height: 60px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Area Teks Berjalan */
+.header-left-menu {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.menu-toggle-icon {
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.menu-toggle-icon:hover {
+    color: var(--primary-blue);
+}
+
 .header-marquee-area {
-  flex-grow: 1; /* Ambil sebagian besar ruang */
-  text-align: left; /* Teks berjalan dari kiri */
-  color: var(--text-light); /* Warna teks untuk marquee */
-  font-size: 1rem;
-  font-weight: 500;
-  white-space: nowrap; /* Penting untuk marquee agar teks tidak pecah baris */
-  overflow: hidden; /* Penting agar marquee tidak menyebabkan scrollbar */
+  flex-grow: 1;
+  text-align: left;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0.8;
 }
 
 .header-marquee-area marquee {
-  padding: 0 10px; /* Sedikit padding agar teks tidak terlalu mepet */
+  padding: 0 10px;
 }
 
-
-/* Area Tombol Kanan */
 .header-right-button-area {
-  flex-shrink: 0; /* Pastikan tombol tidak menyusut */
-  margin-left: 30px; /* Jarak dari teks berjalan */
+  flex-shrink: 0;
+  margin-left: 30px;
 }
 
 .visit-website-button-highlight {
-  background-color: var(--accent-red); /* Warna merah mencolok */
+  background-color: var(--primary-blue);
   color: var(--text-light);
-  border: none; /* Hapus border */
-  padding: 10px 20px; /* Padding lebih besar untuk lebih menonjol */
+  border: none;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
   white-space: nowrap;
-  box-shadow: 0 4px 10px rgba(var(--accent-red), 0.4); /* Efek bayangan untuk mencolok */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .visit-website-button-highlight:hover {
-  background-color: #ff4d4d; /* Sedikit lebih terang saat hover */
-  transform: translateY(-2px); /* Efek sedikit naik saat hover */
-  box-shadow: 0 6px 15px rgba(var(--accent-red), 0.6);
+  background-color: var(--light-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--soft-shadow);
 }
 
-/* Hapus semua styling sebelumnya untuk:
-   .header-left (yang lama)
-   .header-center-logo
-   .header-right-icons-search
-   .search-bar
-   .search-icon
-   .search-bar input
-   .header-right .icon
-   .profile-icon
-   .visit-website-button (yang lama)
-*/
+/* --- Responsive Adjustments --- */
+/* Untuk layar lebih kecil dari 768px (misal: Tablet Portrait, Ponsel Landscape) */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap; /* Izinkan elemen wrap ke baris baru */
+    height: auto; /* Tinggi header menyesuaikan konten */
+    padding: 10px 0; /* Padding horizontal akan diatur oleh App.css */
+    justify-content: space-between; 
+  }
+
+  .header-left-menu {
+      margin-right: 10px; /* Kurangi jarak */
+  }
+
+  .header-marquee-area {
+    order: 3; /* Pindahkan marquee ke baris ketiga (bawah) */
+    width: 100%; /* Ambil lebar penuh */
+    margin-top: 10px; /* Beri jarak dari elemen di atasnya */
+    font-size: 0.8rem; /* Ukuran font lebih kecil */
+  }
+
+  .header-right-button-area {
+    margin-left: auto; /* Dorong tombol ke kanan */
+    flex-basis: auto; /* Lebar menyesuaikan konten */
+  }
+
+  .visit-website-button-highlight {
+      padding: 8px 15px; /* Padding lebih kecil */
+      font-size: 0.85rem; /* Ukuran font lebih kecil */
+  }
+}
+
+/* Untuk layar lebih kecil dari 480px (misal: Ponsel Portrait) */
+@media (max-width: 480px) {
+    .header-right-button-area {
+        flex-basis: 100%; /* Tombol ambil lebar penuh */
+        text-align: center;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .visit-website-button-highlight {
+        width: 90%; /* Lebar tombol hampir penuh */
+    }
+}

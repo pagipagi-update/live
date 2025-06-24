@@ -1,11 +1,12 @@
 // src/components/Sidebar.js
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-// Impor FaTags untuk ikon promo
+// Hapus FaTimes dari import
 import { FaFutbol, FaGamepad, FaDice, FaCoins, FaFacebook, FaTwitter, FaInstagram, FaYoutube, FaTags } from 'react-icons/fa'; 
 import './Sidebar.css';
 
-function Sidebar({ isSidebarOpen }) {
+// Sidebar menerima prop isSidebarOpen dan toggleSidebar
+function Sidebar({ isSidebarOpen, toggleSidebar }) { 
   const location = useLocation();
 
   const navigationItems = [
@@ -14,8 +15,7 @@ function Sidebar({ isSidebarOpen }) {
     { name: 'Live Esports', icon: <FaGamepad />, path: '/live-esports' },
     { name: 'Live Slots', icon: <FaDice />, path: '/live-slots' },
     { name: 'Live Togel', icon: <FaCoins />, path: '/live-togel' },
-    // UBAH INI: Berita Terbaru menjadi Promo Terbaru
-    { name: 'Promo Terbaru', icon: <FaTags />, path: '/promo-terbaru' }, // Path baru
+    { name: 'Promo Terbaru', icon: <FaTags />, path: '/promo-terbaru' }, 
   ];
 
   const socialMediaItems = [
@@ -29,6 +29,8 @@ function Sidebar({ isSidebarOpen }) {
     <aside className={`sidebar-container ${isSidebarOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-header">
         <span className="logo-small">Bola88</span>
+        {/* Hapus baris ini: */}
+        {/* <FaTimes className="sidebar-close-button" onClick={toggleSidebar} /> */}
       </div>
 
       <nav className="sidebar-nav">
@@ -37,6 +39,8 @@ function Sidebar({ isSidebarOpen }) {
             <li
               key={item.name}
               className={location.pathname === item.path ? 'nav-item active' : 'nav-item'}
+              // Tetap tambahkan onClick untuk menutup sidebar saat item navigasi diklik di mobile
+              onClick={window.innerWidth <= 992 ? toggleSidebar : undefined}
             >
               <Link to={item.path}>
                 {item.icon}
@@ -49,7 +53,7 @@ function Sidebar({ isSidebarOpen }) {
 
       <div className="sidebar-banner-area">
         <img
-          src="https://premicloud.net/banner/image/promotion/Bola88_Referral_SquareBanner.webp"
+          src="https://via.placeholder.com/280x400/1698CE/FFFFFF?text=PROMO+BANNER+BOLA88"
           alt="Promotion Banner"
           className="promo-banner"
         />

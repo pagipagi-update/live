@@ -2,13 +2,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --background-dark: #121212;
-  --sidebar-dark: #1e1e1e;
-  --text-light: #ffffff;
-  --text-gray: #a0a0a0;
-  --accent-red: #1698CE; /* UBAH INI: Warna aksen baru (biru) */
-  --card-background: #282828;
-  --border-color: #333333;
+  /* Warna Utama (Dominan #0d7ea8) */
+  --primary-blue: #0d7ea8;     /* Warna biru utama kita */
+  --light-blue: #1f8fb8;      /* Sedikit lebih terang untuk hover/highlight */
+  --dark-blue: #0b6c92;       /* Sedikit lebih gelap untuk active/shadow */
+
+  /* Warna Background & Elemen (Bertingkat untuk Kedalaman) */
+  --background-dark: hsl(220, 15%, 12%); /* Background utama, gelap kebiruan */
+  --sidebar-dark: hsl(220, 15%, 10%);   /* Sidebar, sedikit lebih gelap dari background utama */
+  --card-background: hsl(220, 15%, 18%); /* Kartu dan elemen lain, lebih terang dari background utama */
+  --border-color: hsl(220, 10%, 25%);   /* Warna border dan garis pemisah yang halus */
+  --input-bg: hsl(220, 15%, 22%);     /* Background input field */
+
+  /* Warna Teks */
+  --text-light: #e0e0e0; /* Teks terang yang lembut */
+  --text-gray: hsl(220, 10%, 65%);  /* Teks abu-abu untuk deskripsi/sekunder */
+
+  /* Shadow (Untuk efek modern minimalis dan tidak polos) */
+  --soft-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Bayangan lembut untuk mengangkat elemen */
+  --deep-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Bayangan lebih dalam untuk elemen utama */
 }
 
 body {
@@ -16,7 +28,7 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background-dark);
+  background-color: var(--background-dark); /* Menggunakan variabel baru */
   color: var(--text-light);
   overflow-x: hidden;
 }
@@ -26,9 +38,37 @@ code {
     monospace;
 }
 
-/* Global Reset */
+/* Global Reset & Basic Element Styles */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+a {
+    color: var(--primary-blue); /* Default link color */
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--light-blue); /* Default link hover color */
+}
+
+button {
+    font-family: 'Poppins', sans-serif; /* Pastikan font diterapkan ke tombol */
+}
+
+/* Custom Scrollbar (Opsional, untuk tampilan yang lebih modern) */
+::-webkit-scrollbar {
+  width: 8px; /* Lebar scrollbar */
+}
+::-webkit-scrollbar-track {
+  background: var(--background-dark); /* Warna track scrollbar */
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-blue); /* Warna thumb scrollbar */
+  border-radius: 4px; /* Sudut membulat thumb */
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-blue); /* Warna thumb saat hover */
 }
