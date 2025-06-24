@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react'; // Tetap import useEffect untuk fetching status Owncast utama
+// src/components/ContinueWatchingSection.js
+import React, { useState, useEffect } from 'react';
 import VideoCard from './VideoCard';
 import './ContinueWatchingSection.css';
 
-// URL dasar Owncast Anda (untuk mengambil status dan thumbnail utama)
-const MAIN_OWNCAST_BASE_URL = 'http://localhost:8080'; // GANTI INI DENGAN URL OWNCAST ANDA!
+// URL dasar Owncast Anda (untuk stream utama/default).
+// Digunakan untuk status 'isLive' dan thumbnail live jika ingin.
+const MAIN_OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; // GANTI INI DENGAN URL OWNCAST ANDA!
 
 function ContinueWatchingSection() {
   const [channelsData, setChannelsData] = useState([]);
   const [mainStreamIsLive, setMainStreamIsLive] = useState(false);
-  const [mainLiveThumbnail, setMainLiveThumbnail] = useState('');
-  const [mainStreamTitle, setMainStreamTitle] = useState('');
-  const [mainStreamViewerCount, setMainStreamViewerCount] = useState(0);
+  const [mainLiveThumbnailUrl, setMainLiveThumbnailUrl] = useState(''); // Untuk thumbnail dari Owncast
 
-  // Data untuk channel live. Thumbnail akan diputuskan berdasarkan status stream utama.
+  // Data untuk channel live. staticThumbnail akan digunakan jika stream utama offline.
   const initialChannels = [
     {
       title: 'Live Sports',
       streamer: 'Football Match',
-      staticThumbnail: 'https://via.placeholder.com/300x170/1698CE/FFFFFF?text=LIVE+SPORTS',
+      staticThumbnail: 'https://premicloud.net/banner/image/promotion/bola88bonussquare.webp', // Ganti dengan URL gambar banner Sports Anda
       path: '/live-sports',
     },
     {
       title: 'Live Esports',
       streamer: 'Dota 2 Tournament',
-      staticThumbnail: 'https://via.placeholder.com/300x170/1a1a1a/FFFFFF?text=LIVE+ESPORTS',
+      staticThumbnail: 'https://premicloud.net/banner/image/promotion/WLUBO_New_Quiz_Corner_Squarehome.webp', // Ganti dengan URL gambar banner Esports Anda
       path: '/live-esports',
     },
     {
       title: 'Live Slots',
       streamer: 'Big Win Mania',
-      staticThumbnail: 'https://via.placeholder.com/300x170/2a2a2a/FFFFFF?text=LIVE+SLOTS',
+      staticThumbnail: 'https://premicloud.net/banner/image/promotion/bola88_extrachipsturnovernew_squarebanner.webp', // Ganti dengan URL gambar banner Slots Anda
       path: '/live-slots',
     },
     {
       title: 'Live Togel',
       streamer: 'HK Pool Draw',
-      staticThumbnail: 'https://via.placeholder.com/300x170/3a3a3a/FFFFFF?text=LIVE+TOGEL',
+      staticThumbnail: 'https://premicloud.net/banner/image/promotion/Bola88_Referral_SquareBanner.webp', // Ganti dengan URL gambar banner Togel Anda
       path: '/live-togel',
     },
   ];
@@ -43,44 +43,40 @@ function ContinueWatchingSection() {
   // Efek untuk mengambil status stream utama Owncast dan thumbnailnya
   useEffect(() => {
     const fetchMainStreamStatusAndThumbnail = async () => {
+      let currentLiveThumbnail = '';
+      let isMainStreamOnline = false;
+      let mainStreamTitle = ''; // Variabel untuk menyimpan judul stream dari Owncast
+
       try {
         const statusResponse = await fetch(`${MAIN_OWNCAST_BASE_URL}/api/status`);
         const statusData = await statusResponse.json();
 
-        setMainStreamIsLive(statusData.online);
         if (statusData.online) {
-          setMainLiveThumbnail(`${MAIN_OWNCAST_BASE_URL}/thumbnail.webp`);
-          setMainStreamTitle(statusData.streamTitle || 'Live Stream Aktif');
-          setMainStreamViewerCount(statusData.viewerCount || 0);
-        } else {
-          setMainLiveThumbnail(''); // Kosongkan jika offline, akan pakai static thumbnail di card
-          setMainStreamTitle('Stream Tidak Tersedia');
-          setMainStreamViewerCount(0);
+          isMainStreamOnline = true;
+          currentLiveThumbnail = `${MAIN_OWNCAST_BASE_URL}/thumbnail.webp`; // URL thumbnail live Owncast
+          mainStreamTitle = statusData.streamTitle || 'Stream Sedang Aktif'; // Ambil judul stream dari Owncast
         }
-        console.log("Main Owncast Status:", statusData);
-
-        // Setelah mendapatkan status utama, perbarui data channel untuk ditampilkan
-        const updatedChannels = initialChannels.map(channel => ({
-          ...channel,
-          // Jika stream utama live, semua card akan menampilkan thumbnail live dari stream utama
-          // Jika tidak, akan menampilkan static thumbnail masing-masing
-          currentThumbnail: statusData.online ? `${MAIN_OWNCAST_BASE_URL}/thumbnail.webp` : channel.staticThumbnail,
-          isLive: statusData.online // Semua card di sini mencerminkan status live dari stream utama
-        }));
-        setChannelsData(updatedChannels);
-
       } catch (error) {
         console.error('Error fetching main Owncast status or thumbnail:', error);
-        setMainStreamIsLive(false);
-        setMainLiveThumbnail('');
-        setMainStreamTitle('Error Memuat Stream');
-        setMainStreamViewerCount(0);
-        setChannelsData(initialChannels.map(channel => ({ // Fallback ke static thumbnail jika error
-          ...channel,
-          currentThumbnail: channel.staticThumbnail,
-          isLive: false
-        })));
+        // Jika ada error, asumsikan offline
       }
+
+      setMainStreamIsLive(isMainStreamOnline);
+      setMainLiveThumbnailUrl(currentLiveThumbnail);
+
+      // Perbarui channelsData berdasarkan status stream utama
+      const updatedChannels = initialChannels.map(channel => ({
+        ...channel,
+        // Gunakan live thumbnail Owncast jika stream utama online,
+        // jika tidak, gunakan static thumbnail masing-masing kartu.
+        currentThumbnail: isMainStreamOnline ? currentLiveThumbnail : channel.staticThumbnail,
+        // isLive dari main stream Owncast menentukan apakah tag "LIVE" muncul di kartu.
+        isLive: isMainStreamOnline,
+        // Jika stream utama online, update streamer text (misal: "Judul Stream Utama (Kategori)").
+        // Jika offline, gunakan streamer text default dari initialChannels.
+        streamer: isMainStreamOnline ? (mainStreamTitle.includes(channel.title) ? mainStreamTitle : `${mainStreamTitle}`) : channel.streamer,
+      }));
+      setChannelsData(updatedChannels);
     };
 
     fetchMainStreamStatusAndThumbnail(); // Panggil saat komponen mount
@@ -99,10 +95,10 @@ function ContinueWatchingSection() {
           <VideoCard
             key={index}
             title={channel.title}
-            streamer={channel.streamer} // Akan diperbarui jika stream utama live
-            thumbnail={channel.currentThumbnail} // Gunakan thumbnail dinamis/statis
+            streamer={channel.streamer}
+            thumbnail={channel.currentThumbnail} // Gunakan thumbnail yang sudah ditentukan (static/live)
             to={channel.path}
-            isLive={channel.isLive} // Teruskan status live dari stream utama
+            isLive={channel.isLive} // Teruskan status live untuk tag "LIVE"
           />
         ))}
       </div>

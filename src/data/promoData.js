@@ -6,7 +6,7 @@ export const promoArticles = [
       title: 'Bonus Deposit Member Baru Hingga 100%!',
       date: 'Valid hingga 31 Desember 2025',
       excerpt: 'Dapatkan bonus deposit 100% untuk member baru. Klaim sekarang dan gandakan kemenangan Anda!',
-      imageUrl: 'https://via.placeholder.com/400x225/1698CE/FFFFFF?text=BONUS+100%', 
+      imageUrl: 'https://premicloud.net/banner/image/promotion/UBO_KOIN88%20BANNER%20SPORT_MenuPromosi.webp', 
       link: '#/promo/bonus-new-member' 
     },
     {
@@ -14,7 +14,7 @@ export const promoArticles = [
       title: 'Cashback Mingguan Sportsbook 5%',
       date: 'Setiap Hari Senin',
       excerpt: 'Nikmati cashback 5% setiap minggu untuk semua taruhan sportsbook Anda. Tanpa turnover tinggi!',
-      imageUrl: 'https://via.placeholder.com/400x225/282828/FFFFFF?text=CASHBACK+SPORTS',
+      imageUrl: 'https://premicloud.net/banner/image/promotion/Bola88_Parlay_Menupromosi.webp',
       link: '#/promo/cashback-sports'
     },
     {
@@ -22,7 +22,7 @@ export const promoArticles = [
       title: 'Free Spin Slot Harian: Klaim Sekarang!',
       date: 'Promo Berakhir 30 Juni 2025',
       excerpt: 'Dapatkan kesempatan free spin setiap hari di game slot pilihan. Cek syarat dan ketentuan.',
-      imageUrl: 'https://via.placeholder.com/400x225/1e1e1e/FFFFFF?text=FREE+SPIN+SLOT',
+      imageUrl: 'https://premicloud.net/banner/image/promotion/bola88_extrachipsturnovernew_menupromosi.webp',
       link: '#/promo/free-spin'
     },
     {
@@ -30,7 +30,7 @@ export const promoArticles = [
       title: 'Diskon Togel Terbesar Hanya di Bola88!',
       date: 'Setiap Hari',
       excerpt: 'Dapatkan diskon terbesar untuk setiap pasaran togel favorit Anda. Pasang angka keberuntungan Anda sekarang!',
-      imageUrl: 'https://via.placeholder.com/400x225/3a3a3a/FFFFFF?text=DISKON+TOGEL',
+      imageUrl: 'https://premicloud.net/banner/image/promotion/ALLUBO_HADIAH%20TTM_MenuPromosi.webp',
       link: '#/promo/diskon-togel'
     },
     {
@@ -38,7 +38,7 @@ export const promoArticles = [
       title: 'Event Spesial Esports: Hadiah Jutaan Rupiah!',
       date: 'Promo Berakhir 15 Juli 2025',
       excerpt: 'Ikuti event esports mingguan dan menangkan hadiah total jutaan rupiah. Jangan lewatkan!',
-      imageUrl: 'https://via.placeholder.com/400x225/555555/FFFFFF?text=ESPORTS+EVENT',
+      imageUrl: 'https://premicloud.net/banner/image/promotion/AllUBO_New_Quiz_Corner_Menupromo.webp',
       link: '#/promo/esports-event'
     },
     {
@@ -46,7 +46,7 @@ export const promoArticles = [
       title: 'Referral Bonus: Ajak Teman Dapat Hadiah!',
       date: 'Berlaku Selamanya',
       excerpt: 'Ajak teman Anda bergabung dan dapatkan bonus referral tanpa batas. Semakin banyak teman, semakin besar bonusnya!',
-      imageUrl: 'https://via.placeholder.com/400x225/666666/FFFFFF?text=REFERRAL+BONUS',
+      imageUrl: 'https://premicloud.net/banner/image/promotion/Bola88_Referral_MenuPromo.webp',
       link: '#/promo/referral-bonus'
     }
   ];
