@@ -53,7 +53,7 @@ function Sidebar({ isSidebarOpen, toggleSidebar }) {
 
       <div className="sidebar-banner-area">
         <img
-          src="https://premicloud.net/banner/image/promotion/Bola88_Referral_SquareBanner.webp"
+          src="https://file.ahs.my.id/-tJiWgCY32J"
           alt="Promotion Banner"
           className="promo-banner"
         />

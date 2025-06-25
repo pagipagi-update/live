@@ -4,7 +4,7 @@ import VideoCard from './VideoCard';
 import './ContinueWatchingSection.css';
 import { Link } from 'react-router-dom';
 
-const MAIN_OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; 
+const MAIN_OWNCAST_BASE_URL = 'https://stream.ahs.my.id/'; 
 
 function ContinueWatchingSection() {
   const [channelsData, setChannelsData] = useState([]);
@@ -15,25 +15,25 @@ function ContinueWatchingSection() {
     {
       title: 'Live Sports',
       streamer: 'Football Match',
-      staticThumbnail: 'https://via.placeholder.com/350x197/1698CE/FFFFFF?text=SPORTS+BANNER', 
+      staticThumbnail: 'https://file.ahs.my.id/-spLWwjB9pJ', 
       path: '/live-sports',
     },
     {
       title: 'Live Esports',
       streamer: 'Dota 2 Tournament',
-      staticThumbnail: 'https://via.placeholder.com/350x197/1a1a1a/FFFFFF?text=ESPORTS+BANNER',
+      staticThumbnail: 'https://file.ahs.my.id/-uHsBn7G4oX',
       path: '/live-esports',
     },
     {
       title: 'Live Slots',
       streamer: 'Big Win Mania',
-      staticThumbnail: 'https://via.placeholder.com/350x197/2a2a2a/FFFFFF?text=SLOTS+BANNER',
+      staticThumbnail: 'https://file.ahs.my.id/-32YZZ2UUcB',
       path: '/live-slots',
     },
     {
       title: 'Live Togel',
       streamer: 'HK Pool Draw',
-      staticThumbnail: 'https://via.placeholder.com/350x197/3a3a3a/FFFFFF?text=TOGEL+BANNER',
+      staticThumbnail: 'https://file.ahs.my.id/-gnrWQ8SpCk',
       path: '/live-togel',
     },
   ];

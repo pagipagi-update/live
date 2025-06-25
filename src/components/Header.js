@@ -5,7 +5,7 @@ import './Header.css';
 // Header sekarang menerima prop toggleSidebar
 function Header({ toggleSidebar }) {
   const handleVisitWebsite = () => {
-    window.open('https://www.google.com', '_blank'); // Ganti URL ini
+    window.open('http://indo.skin/bola88', '_blank'); // Ganti URL ini
   };
 
   return (

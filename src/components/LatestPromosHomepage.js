@@ -11,7 +11,7 @@ function LatestPromosHomepage() {
     <section className="latest-promos-homepage-section">
       <div className="section-header-homepage"> {/* Header khusus untuk section ini */}
         <h2 className="homepage-section-title">Promo Terbaru</h2>
-        <Link to="/promo-terbaru" className="view-all-button">Lihat Semua Promo > </Link>
+        <Link to="/promo-terbaru" className="view-all-button">Lihat Semua Promo </Link>
       </div>
       
       <div className="promos-grid-homepage">
@@ -21,7 +21,7 @@ function LatestPromosHomepage() {
             <div className="promo-card-content-homepage">
               <h3 className="promo-card-title-homepage">{promo.title}</h3>
               <p className="promo-card-excerpt-homepage">{promo.excerpt}</p>
-              <a href={promo.link} className="claim-button-homepage">Klaim Sekarang!</a>
+              <a href="/promo-terbaru" className="claim-button-homepage">Klaim Sekarang!</a>
             </div>
           </div>
         ))}

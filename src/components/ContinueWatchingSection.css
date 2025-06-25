@@ -9,7 +9,7 @@
   
   .section-header {
     display: flex;
-    justify-content: center; /* Pusatkan judul */
+    justify-content: space-between; /* Pusatkan judul */
     width: 100%; 
     align-items: center;
     margin-bottom: 25px;

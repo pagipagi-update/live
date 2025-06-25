@@ -7,25 +7,25 @@ function QuickAccessMenu() {
   const menuItems = [
     { 
       name: 'Website Bola88', 
-      link: 'https://www.bola88.com', 
+      link: 'http://indo.skin/bola88', 
       isExternal: true, 
       icon: <FaGlobe className="menu-icon" /> // Ikon Globe untuk website
     }, 
     { 
       name: 'Live RTP', 
-      link: '/live-rtp', // Ganti dengan URL/path Live RTP
+      link: 'http://indo.skin/rtpbola88', // Ganti dengan URL/path Live RTP
       isExternal: false, 
       icon: <FaChartLine className="menu-icon" /> // Ikon Chart Line untuk RTP
     }, 
     { 
       name: 'Live Score', 
-      link: 'https://www.livescore.com', // Ganti dengan URL Live Score
+      link: 'http://indo.skin/bola88', // Ganti dengan URL Live Score
       isExternal: true, 
       icon: <FaFootballBall className="menu-icon" /> // Ikon Bola Sepak untuk Live Score
     }, 
     { 
       name: 'Result Togel', 
-      link: '/result-togel', // Ganti dengan URL/path Result Togel
+      link: 'http://indo.skin/zonabola88', // Ganti dengan URL/path Result Togel
       isExternal: false, 
       icon: <FaTicketAlt className="menu-icon" /> // Ikon Tiket untuk Result Togel
     }, 

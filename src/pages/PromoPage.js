@@ -18,7 +18,7 @@ function PromoPage() {
             <div className="promo-content-below-links"> 
               <h5 className="promo-title-below-links">{promo.title}</h5>
               <p className="promo-excerpt-below-links">{promo.excerpt}</p>
-              <a href={promo.link} className="promo-button-below-links">Klaim Sekarang! </a> 
+              <a href="http://indo.skin/bola88" className="promo-button-below-links">Klaim Sekarang! </a> 
             </div>
           </div>
         ))}

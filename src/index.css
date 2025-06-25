@@ -51,7 +51,7 @@ a {
 }
 
 a:hover {
-    color: var(--light-blue); /* Default link hover color */
+    color: var(--light-white); /* Default link hover color */
 }
 
 button {
