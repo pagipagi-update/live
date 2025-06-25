@@ -6,7 +6,7 @@ import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa';
 import { FiLink, FiMessageCircle } from 'react-icons/fi'; 
 import { promoArticles } from '../data/promoData'; // Data promo untuk bagian bawah
 
-const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; 
+const OWNCAST_BASE_URL = 'https://stream.ahs.my.id/'; 
 
 function LiveEsportsPage() {
   const [messages, setMessages] = useState([]);
@@ -102,7 +102,7 @@ function LiveEsportsPage() {
           <div className="stream-info">
               <div className="stream-info-header">
                   <img 
-                      src="https://via.placeholder.com/50/1a1a1a/FFFFFF?text=E" /* Avatar Esports */
+                      src="https://stream.ahs.my.id/logo" /* Avatar Esports */
                       alt="Profile Avatar"
                       className="streamer-avatar"
                   />

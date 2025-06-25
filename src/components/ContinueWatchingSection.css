@@ -1,31 +1,115 @@
 /* src/components/ContinueWatchingSection.css */
-.live-now-section { /* Ubah class name di sini juga jika sudah diubah di JS */
-  margin-top: 40px;
-}
-
-.section-header {
-  display: flex;
-  /* Karena dropdown dihapus, kita tidak lagi perlu justify-content: space-between
-     Kita bisa biarkan defaultnya (flex-start) atau set explicitely */
-  justify-content: flex-start; /* Atau biarkan default, tergantung layout yang diinginkan */
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.section-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-light);
-  margin: 0;
-}
-
-/* Hapus semua styling untuk filter-dropdown jika masih ada
-.filter-dropdown { ... }
-.filter-dropdown option { ... }
-*/
-
-.video-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsif */
-  gap: 25px; /* Jarak antar kartu */
-}
+.live-now-section { 
+    margin-top: 40px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pusatkan seluruh section "Live Now" */
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: center; /* Pusatkan judul */
+    width: 100%; 
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0;
+  }
+  
+  .video-cards-grid {
+    display: grid;
+    /* UBAH INI: DEFAULT (Desktop) - Paksa 4 kolom yang rata lebar */
+    grid-template-columns: repeat(4, 1fr); /* 4 kolom dengan lebar yang sama, mengisi ruang */
+    gap: 20px; /* UBAH INI: Jarak antar kartu lebih kecil agar 4 kolom pas */
+    width: 100%; /* Ambil lebar penuh dari parent yang ada padding */
+    /* justify-items: center; Dihapus karena 1fr akan mengisi penuh, jadi item sudah rata */
+    margin: 0 auto 30px auto; /* Margin auto untuk memusatkan jika parent tidak 100% atau ada padding */
+  }
+  
+  .watch-now-button {
+      background-color: var(--primary-blue);
+      color: var(--text-light);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: var(--soft-shadow);
+      white-space: nowrap;
+      min-width: 250px; 
+      text-align: center;
+  }
+  
+  .watch-now-button:hover {
+      background-color: var(--light-blue);
+      transform: translateY(-3px);
+      box-shadow: var(--deep-shadow);
+  }
+  
+  
+  /* --- Responsive Adjustments --- */
+  /* Untuk layar lebih kecil dari 992px (Tablet Lebar) - 2 kolom */
+  @media (max-width: 992px) {
+      .live-now-section {
+          padding: 0 15px;
+      }
+      .section-header {
+          max-width: 100%; /* Pastikan header juga 100% */
+          justify-content: space-between; /* Untuk mobile, agar tombol di kanan */
+      }
+      .video-cards-grid {
+          grid-template-columns: repeat(2, 1fr); /* UBAH INI: 2 kolom di tablet */
+          gap: 20px;
+          max-width: 100%; /* Ambil lebar penuh */
+      }
+      .watch-now-button {
+          padding: 12px 25px;
+          font-size: 1rem;
+      }
+  }
+  
+  /* Untuk layar lebih kecil dari 768px (Mobile - UBAH JADI 1 KOLOM) */
+  @media (max-width: 768px) {
+      .live-now-section {
+          padding: 0 15px;
+          margin-top: 30px;
+      }
+      .section-title {
+          font-size: 1.5rem;
+      }
+      .section-header {
+          flex-direction: column; /* Judul dan tombol menumpuk */
+          gap: 10px;
+          align-items: center;
+          text-align: center;
+          max-width: 100%;
+      }
+      .watch-now-button {
+          width: 90%; 
+          min-width: unset;
+          font-size: 1rem;
+      }
+      .video-cards-grid {
+          grid-template-columns: 1fr; /* UBAH INI: 1 kolom di mobile */
+          max-width: 100%; /* Ambil lebar penuh */
+          gap: 20px;
+      }
+  }
+  
+  /* Untuk layar sangat kecil (<480px) - TETAP 1 KOLOM */
+  @media (max-width: 480px) {
+      .video-cards-grid {
+          grid-template-columns: 1fr; /* TETAP 1 kolom di ponsel sangat kecil */
+          max-width: 100%;
+          gap: 15px;
+      }
+  }

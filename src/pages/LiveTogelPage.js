@@ -6,7 +6,7 @@ import { FaTelegramPlane, FaWhatsapp } from 'react-icons/fa';
 import { FiLink, FiMessageCircle } from 'react-icons/fi'; 
 import { promoArticles } from '../data/promoData'; // Data promo untuk bagian bawah
 
-const OWNCAST_BASE_URL = 'http://159.223.37.64:8080/'; 
+const OWNCAST_BASE_URL = 'https://stream.ahs.my.id/'; 
 
 function LiveTogelPage() {
   const [messages, setMessages] = useState([]);

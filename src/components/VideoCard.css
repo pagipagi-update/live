@@ -1,45 +1,38 @@
 /* src/components/VideoCard.css */
 .video-card {
-  width: 280px;
-  background-color: var(--card-background);
-  border-radius: 12px;
+  width: 100%; 
+  background-color: var(--card-background); 
+  border-radius: 12px; 
   overflow: hidden;
   box-shadow: var(--soft-shadow);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex; 
+  flex-direction: column;
 }
 
 .video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--deep-shadow);
+  transform: translateY(-3px);
+  box-shadow: var(--deep-shadow); 
 }
 
 .card-thumbnail {
   position: relative;
   width: 100%;
-  height: 160px; /* Tinggi area thumbnail */
+  /* Default (Desktop 4 kolom): Tinggi proporsional untuk 1fr (akan menyusut, misal 250px -> 140.625px) */
+  height: 140.625px; /* UBAH INI */
   
-  /* KEMBALIKAN: Styling untuk background-image */
-  background-size: cover; /* Pastikan gambar mengisi penuh */
-  background-position: center; /* Pusatkan gambar */
-  background-color: #000; /* Warna fallback jika gambar tidak ada */
+  background-size: cover; 
+  background-position: center;
+  background-color: #000; 
 
-  border-top-left-radius: 12px;
+  border-top-left-radius: 12px; 
   border-top-right-radius: 12px;
   overflow: hidden;
+  flex-shrink: 0; 
 }
 
-/* HAPUS INI: Styling untuk tag <img> yang tidak lagi digunakan */
-/*
-.live-preview-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-*/
-
-.live-tag-card { /* Tag "LIVE" di kartu */
+.live-tag-card { 
   position: absolute;
   top: 10px;
   left: 10px;
@@ -54,7 +47,11 @@
 }
 
 .card-info {
-  padding: 15px;
+  padding: 15px; 
+  display: flex; 
+  flex-direction: column;
+  flex-grow: 1; 
+  justify-content: space-between; 
 }
 
 .card-title {
@@ -62,16 +59,18 @@
   font-weight: 600;
   color: var(--text-light);
   margin: 0 0 8px 0;
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card-streamer {
+.card-streamer { 
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-gray);
+  margin-bottom: 15px; 
 }
 
 .card-streamer .online-dot-small {
@@ -87,25 +86,49 @@
   color: inherit;
 }
 .video-card-link:hover .video-card {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
   box-shadow: var(--deep-shadow);
 }
 
 /* --- Responsive Adjustments --- */
-/* ... (Existing media queries are still valid) ... */
+/* Untuk layar lebih kecil dari 992px */
+@media (max-width: 992px) {
+  .card-thumbnail {
+    height: 168.75px; /* Tinggi proporsional untuk 2 kolom (300 * 9 / 16) */
+  }
+}
+
+/* Untuk layar lebih kecil dari 768px (Mobile - UBAH JADI 1 KOLOM) */
 @media (max-width: 768px) {
   .video-card {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
+    padding: 0; 
+    gap: 0;
   }
   .card-thumbnail {
-    height: 180px;
+    width: 100%; 
+    height: 180px; /* Lebih tinggi sedikit di mobile */
+    border-radius: 10px; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0; 
+  }
+  .card-info {
+    padding: 15px; 
+    gap: 0;
   }
   .card-title {
       font-size: 1rem;
+      margin-bottom: 5px;
   }
   .card-streamer {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      margin-bottom: 0;
+  }
+}
+
+/* Untuk layar sangat kecil (<480px) - TETAP 1 KOLOM */
+@media (max-width: 480px) {
+  .card-thumbnail {
+      height: 150px; /* Sesuaikan tinggi gambar agar pas di ponsel vertikal */
   }
 }
