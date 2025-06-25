@@ -102,7 +102,7 @@ function LiveEsportsPage() {
           <div className="stream-info">
               <div className="stream-info-header">
                   <img 
-                      src="https://stream.ahs.my.id/logo" /* Avatar Esports */
+                      src={`${OWNCAST_BASE_URL}/logo`} /* Avatar Esports */
                       alt="Profile Avatar"
                       className="streamer-avatar"
                   />
