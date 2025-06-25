@@ -102,7 +102,7 @@ function LiveSlotsPage() {
           <div className="stream-info">
               <div className="stream-info-header">
                   <img 
-                      src="https://via.placeholder.com/50/2a2a2a/FFFFFF?text=S" /* Avatar Slots */
+                      src="https://stream.ahs.my.id/logo" /* Avatar Slots */
                       alt="Profile Avatar"
                       className="streamer-avatar"
                   />

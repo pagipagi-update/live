@@ -102,7 +102,7 @@ function LiveTogelPage() {
           <div className="stream-info">
               <div className="stream-info-header">
                   <img 
-                      src="https://via.placeholder.com/50/3a3a3a/FFFFFF?text=T" /* Avatar Togel */
+                      src="https://stream.ahs.my.id/logo" /* Avatar Togel */
                       alt="Profile Avatar"
                       className="streamer-avatar"
                   />

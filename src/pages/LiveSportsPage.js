@@ -107,7 +107,7 @@ function LiveSportsPage() {
           <div className="stream-info">
               <div className="stream-info-header">
                   <img 
-                      src="https://via.placeholder.com/50/1698CE/FFFFFF?text=P" 
+                      src="https://stream.ahs.my.id/logo" 
                       alt="Profile Avatar"
                       className="streamer-avatar"
                   />
