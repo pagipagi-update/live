@@ -10,9 +10,6 @@ function ChatBox({ messages, onSendMessage }) { // HAPUS isChatOpen dari props
 
   const messagesEndRef = useRef(null); 
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]); // Selalu scroll ke bawah saat pesan berubah
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

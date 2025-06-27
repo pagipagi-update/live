@@ -10,10 +10,10 @@
   
   .footer-content {
     display: flex;
-    justify-content: space-around; /* Menyebarkan kolom-kolom */
+    justify-content: space-between; /* Menyebarkan kolom-kolom */
     flex-wrap: wrap; /* Mengizinkan wrap di layar kecil */
-    gap: 30px; /* Jarak antar kolom */
-    max-width: 1200px; /* Batasi lebar konten footer */
+    gap: 100px; /* Jarak antar kolom */
+    max-width: 1500px; /* Batasi lebar konten footer */
     margin: 0 auto; /* Pusatkan konten footer */
     margin-bottom: 30px; /* Jarak sebelum bagian footer-bottom */
   }

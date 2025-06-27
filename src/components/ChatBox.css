@@ -1,6 +1,6 @@
 /* src/components/ChatBox.css */
 .chatbox-container {
-  width: 350px; /* Lebar chatbox */
+  width: 250px; /* Lebar chatbox */
   background-color: var(--card-background);
   border-radius: 10px;
   display: flex;

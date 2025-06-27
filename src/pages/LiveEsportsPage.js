@@ -90,7 +90,7 @@ function LiveEsportsPage() {
       <div className="live-content-layout">
         <div className="video-player-and-info-frame">
           <div className="video-placeholder"> 
-            <iframe
+            <iframe 
               src={`${OWNCAST_BASE_URL}/embed/video`}
               title="Owncast Live Esports Stream"
               frameBorder="0"
